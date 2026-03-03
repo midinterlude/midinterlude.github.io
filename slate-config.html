@@ -1,0 +1,1649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slate - Configuration Manager</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #0f0f0f;
+            --bg-tertiary: #151515;
+            --bg-elevated: #1a1a1a;
+            --bg-overlay: #222222;
+            --border-primary: #222222;
+            --border-secondary: #1a1a1a;
+            --text-primary: #e0e0e0;
+            --text-secondary: #999999;
+            --text-muted: #666666;
+            --text-link: #dc143c;
+            --accent-primary: #dc143c;
+            --accent-hover: #ff1744;
+            --success: #26a69a;
+            --danger: #dc143c;
+            --warning: #ff9800;
+            --code-bg: #0a0a0a;
+            --shadow: 0 8px 24px rgba(0, 0, 0, 0.8);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 100%;
+            height: 100vh;
+            background: var(--bg-secondary);
+            border: none;
+            border-radius: 0;
+            box-shadow: none;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            padding: 32px 40px;
+            text-align: center;
+            border-bottom: 1px solid var(--border-primary);
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 500;
+            margin-bottom: 8px;
+            letter-spacing: normal;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            font-weight: 400;
+        }
+
+        .main-content {
+            display: flex;
+            flex: 1;
+            min-height: 0;
+        }
+
+        .sidebar {
+            width: 280px;
+            background: var(--bg-tertiary);
+            border-right: 1px solid var(--border-primary);
+            padding: 24px 16px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sidebar-actions {
+            margin-top: auto;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-primary);
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .sidebar-btn {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            padding: 12px 16px;
+            margin-bottom: 4px;
+            background: var(--bg-elevated);
+            border: 1px solid var(--border-primary);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            text-decoration: none;
+            gap: 12px;
+        }
+
+        .sidebar-btn:hover {
+            background: var(--bg-overlay);
+            color: var(--text-primary);
+            border-color: var(--border-primary);
+            transform: translateY(-1px);
+        }
+
+        .sidebar-btn.btn-success {
+            background: var(--success);
+            color: white;
+            border-color: var(--success);
+        }
+
+        .sidebar-btn.btn-primary {
+            background: var(--accent-primary);
+            color: white;
+            border-color: var(--accent-primary);
+        }
+
+        .sidebar-btn.btn-secondary {
+            background: var(--bg-overlay);
+            color: var(--text-primary);
+            border-color: var(--border-primary);
+        }
+
+        .sidebar-btn i {
+            width: 16px;
+            text-align: center;
+            flex-shrink: 0;
+        }
+
+        .sidebar-btn .divider {
+            width: 1px;
+            height: 16px;
+            background: rgba(255, 255, 255, 0.3);
+            flex-shrink: 0;
+        }
+
+        .sidebar-btn span {
+            flex: 1;
+            text-align: left;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            padding: 12px 16px;
+            margin-bottom: 4px;
+            background: transparent;
+            border: 1px solid transparent;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            text-decoration: none;
+        }
+
+        .nav-item i {
+            width: 16px;
+            text-align: center;
+            flex-shrink: 0;
+            margin-right: 12px;
+        }
+
+        .nav-item .divider {
+            width: 1px;
+            height: 16px;
+            background: var(--border-primary);
+            flex-shrink: 0;
+            margin-right: 12px;
+        }
+
+        .nav-item span {
+            text-align: left;
+            flex: 1;
+        }
+
+        .nav-item:hover {
+            background: var(--bg-elevated);
+            color: var(--text-primary);
+            border-color: var(--border-primary);
+        }
+
+        .nav-item.active {
+            background: var(--accent-primary) !important;
+            color: white !important;
+            border-color: var(--accent-primary) !important;
+        }
+
+        .nav-item.active i {
+            color: white !important;
+        }
+
+        .nav-item.active .divider {
+            background: rgba(255, 255, 255, 0.3) !important;
+        }
+
+        .content {
+            flex: 1;
+            padding: 32px 40px;
+            overflow-y: auto;
+            max-height: calc(100vh - 200px);
+        }
+
+        .section {
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+            animation: fadeIn 0.2s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section h2 {
+            color: var(--text-primary);
+            margin-bottom: 24px;
+            font-size: 1.75rem;
+            font-weight: 600;
+            letter-spacing: -0.025em;
+            border-bottom: 1px solid var(--border-primary);
+            padding-bottom: 16px;
+        }
+
+        .profile-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+
+        .profile-card {
+            background: var(--bg-elevated);
+            border: 1px solid var(--border-primary);
+            border-radius: 12px;
+            padding: 24px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: left;
+        }
+
+        .profile-card-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .profile-card-header i {
+            width: 20px;
+            text-align: center;
+            flex-shrink: 0;
+        }
+
+        .profile-card-header .divider {
+            width: 1px;
+            height: 20px;
+            background: var(--border-primary);
+            flex-shrink: 0;
+        }
+
+        .profile-card-header h3 {
+            flex: 1;
+            margin: 0;
+        }
+
+        .profile-card:hover {
+            background: var(--bg-overlay);
+            border-color: var(--accent-primary);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(88, 166, 255, 0.1);
+        }
+
+        .profile-card.selected {
+            background: var(--accent-primary);
+            border-color: var(--accent-primary);
+            color: white;
+        }
+
+        .profile-card h3 {
+            color: var(--text-primary);
+            margin-bottom: 8px;
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        .profile-card.selected h3 {
+            color: white;
+        }
+
+        .profile-card p {
+            color: var(--text-secondary);
+            font-size: 14px;
+            line-height: 1.5;
+            font-weight: 400;
+        }
+
+        .profile-card.selected p {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .config-group {
+            background: var(--bg-elevated);
+            border: 1px solid var(--border-primary);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 24px;
+        }
+
+        .config-group h3 {
+            color: var(--text-primary);
+            margin-bottom: 20px;
+            font-size: 1.125rem;
+            font-weight: 600;
+            letter-spacing: -0.025em;
+        }
+
+        .config-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 0;
+            border-bottom: 1px solid var(--border-secondary);
+        }
+
+        .config-item:last-child {
+            border-bottom: none;
+        }
+
+        .config-label {
+            flex: 1;
+            font-weight: 500;
+            color: var(--text-primary);
+            font-size: 14px;
+        }
+
+        .config-description {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-top: 4px;
+            font-weight: 400;
+        }
+
+        .toggle-switch {
+            position: relative;
+            width: 44px;
+            height: 24px;
+            background: var(--bg-overlay);
+            border: 1px solid var(--border-primary);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .toggle-switch.active {
+            background: var(--accent-primary);
+            border-color: var(--accent-primary);
+        }
+
+        .toggle-switch::after {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 18px;
+            height: 18px;
+            background: white;
+            border-radius: 50%;
+            transition: transform 0.2s ease;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+        }
+
+        .toggle-switch.active::after {
+            transform: translateX(20px);
+        }
+
+        .text-input {
+            padding: 8px 12px;
+            background: var(--bg-primary);
+            border: 1px solid var(--border-primary);
+            border-radius: 6px;
+            font-size: 14px;
+            width: 200px;
+            color: var(--text-primary);
+            font-family: 'JetBrains Mono', monospace;
+            transition: all 0.2s ease;
+        }
+
+        .text-input:focus {
+            outline: none;
+            border-color: var(--accent-primary);
+            box-shadow: 0 0 0 3px rgba(31, 111, 235, 0.1);
+        }
+
+        .text-input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .list-editor {
+            border: 1px solid var(--border-primary);
+            border-radius: 8px;
+            padding: 16px;
+            background: var(--bg-primary);
+        }
+
+        .list-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px;
+            margin-bottom: 8px;
+            background: var(--bg-elevated);
+            border: 1px solid var(--border-secondary);
+            border-radius: 6px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+        }
+
+        .list-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .btn {
+            padding: 10px 16px;
+            border: 1px solid var(--border-primary);
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-elevated);
+            color: var(--text-primary);
+        }
+
+        .btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-primary {
+            background: var(--accent-primary);
+            color: white;
+            border-color: var(--accent-primary);
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-hover);
+            border-color: var(--accent-hover);
+        }
+
+        .btn-success {
+            background: var(--success);
+            color: white;
+            border-color: var(--success);
+        }
+
+        .btn-success:hover {
+            background: #2da844;
+            border-color: #2da844;
+        }
+
+        .btn-danger {
+            background: var(--danger);
+            color: white;
+            border-color: var(--danger);
+        }
+
+        .btn-danger:hover {
+            background: #da3a32;
+            border-color: #da3a32;
+        }
+
+        .btn-secondary {
+            background: var(--bg-overlay);
+            color: var(--text-primary);
+            border-color: var(--border-primary);
+        }
+
+        .btn-secondary:hover {
+            background: var(--bg-elevated);
+            border-color: var(--border-primary);
+        }
+
+        .btn-sm {
+            padding: 6px 12px;
+            font-size: 12px;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 16px;
+            margin-top: 32px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border-primary);
+        }
+
+        .status-bar {
+            background: var(--bg-tertiary);
+            padding: 16px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+            border-top: 1px solid var(--border-primary);
+            color: var(--text-secondary);
+        }
+
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .status-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--success);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            backdrop-filter: blur(4px);
+        }
+
+        .modal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-primary);
+            border-radius: 12px;
+            padding: 32px;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: var(--shadow);
+        }
+
+        .modal h3 {
+            margin-bottom: 16px;
+            color: var(--text-primary);
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        .modal p {
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+            line-height: 1.5;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 12px;
+            justify-content: flex-end;
+        }
+
+        .file-input-wrapper {
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+        }
+
+        .file-input-wrapper input[type=file] {
+            position: absolute;
+            left: -9999px;
+        }
+
+        .file-input-label {
+            padding: 10px 16px;
+            background: var(--accent-primary);
+            color: white;
+            border-radius: 6px;
+            cursor: pointer;
+            display: inline-block;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            border: 1px solid var(--accent-primary);
+        }
+
+        .file-input-label:hover {
+            background: var(--accent-hover);
+            border-color: var(--accent-hover);
+        }
+
+        /* Theme Editor Styles */
+        .theme-presets {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-top: 16px;
+        }
+
+        .theme-preset {
+            background: var(--bg-elevated);
+            border: 1px solid var(--border-primary);
+            border-radius: 8px;
+            padding: 16px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: center;
+        }
+
+        .theme-preset:hover {
+            background: var(--bg-overlay);
+            border-color: var(--accent-primary);
+            transform: translateY(-2px);
+        }
+
+        .theme-preview {
+            width: 100%;
+            height: 60px;
+            border-radius: 6px;
+            margin-bottom: 12px;
+            border: 1px solid var(--border-secondary);
+        }
+
+        .slate-preview {
+            background: linear-gradient(135deg, #0a0a0a 0%, #151515 50%, #dc143c 100%);
+        }
+
+        .obsidian-preview {
+            background: linear-gradient(135deg, #0d1117 0%, #161b22 50%, #1f6feb 100%);
+        }
+
+        .github-preview {
+            background: linear-gradient(135deg, #0d1117 0%, #21262d 50%, #58a6ff 100%);
+        }
+
+        .vscode-preview {
+            background: linear-gradient(135deg, #1e1e1e 0%, #252526 50%, #007acc 100%);
+        }
+
+        .nord-preview {
+            background: linear-gradient(135deg, #2e3440 0%, #3b4252 50%, #88c0d0 100%);
+        }
+
+        .dracula-preview {
+            background: linear-gradient(135deg, #282a36 0%, #44475a 50%, #bd93f9 100%);
+        }
+
+        .light-preview {
+            background: linear-gradient(135deg, #ffffff 0%, #f6f8fa 50%, #0366d6 100%);
+        }
+
+        .theme-preset h4 {
+            color: var(--text-primary);
+            margin-bottom: 4px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .theme-preset p {
+            color: var(--text-secondary);
+            font-size: 12px;
+            margin: 0;
+        }
+
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 16px;
+        }
+
+        .color-input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .color-input-group label {
+            color: var(--text-primary);
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .color-input-group input[type="color"] {
+            width: 50px;
+            height: 35px;
+            border: 1px solid var(--border-primary);
+            border-radius: 6px;
+            cursor: pointer;
+            background: var(--bg-primary);
+        }
+
+        .color-text {
+            padding: 6px 10px;
+            background: var(--bg-primary);
+            border: 1px solid var(--border-primary);
+            border-radius: 4px;
+            color: var(--text-primary);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+        }
+
+        .color-text:focus {
+            outline: none;
+            border-color: var(--accent-primary);
+        }
+
+        /* Scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-primary);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--border-primary);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--bg-overlay);
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+                border-right: none;
+                border-bottom: 1px solid var(--border-primary);
+            }
+            
+            .profile-cards {
+                grid-template-columns: 1fr;
+            }
+            
+            .container {
+                margin: 0;
+                border-radius: 0;
+                min-height: 100vh;
+            }
+            
+            .content {
+                padding: 24px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <pre style="font-family: monospace; font-size: 1rem; line-height: 1; color: var(--text-primary); white-space: pre; text-align: left;">
+▐▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▌
+▐     ▄████████  ▄█          ▄████████     ███        ▄████████  ▌
+▐    ███    ███ ███         ███    ███ ▀█████████▄   ███    ███  ▌
+▐    ███    █▀  ███         ███    ███    ▀███▀▀██   ███    █▀   ▌
+▐    ███        ███         ███    ███     ███   ▀  ▄███▄▄▄      ▌
+▐  ▀███████████ ███       ▀███████████     ███     ▀▀███▀▀▀      ▌
+▐           ███ ███         ███    ███     ███       ███    █▄   ▌
+▐     ▄█    ███ ███▌    ▄   ███    ███     ███       ███    ███  ▌
+▐   ▄████████▀  █████▄▄██   ███    █▀     ▄████▀     ██████████  ▌
+▐               ▀                                                ▌
+▐▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▌
+            </pre>
+            <p style="text-align: left;">Advanced Configuration Web Interface - by midinterlude (on discord)</p>
+        </div>
+
+        <div class="main-content">
+            <div class="sidebar">
+                <button class="nav-item active" onclick="showSection('profiles')">
+                    <i class="fas fa-layer-group"></i>
+                    <div class="divider"></div>
+                    <span>Profiles</span>
+                </button>
+                <button class="nav-item" onclick="showSection('general')">
+                    <i class="fas fa-cog"></i>
+                    <div class="divider"></div>
+                    <span>General</span>
+                </button>
+                <button class="nav-item" onclick="showSection('cleaning')">
+                    <i class="fas fa-broom"></i>
+                    <div class="divider"></div>
+                    <span>Cleaning</span>
+                </button>
+                <button class="nav-item" onclick="showSection('roblox')">
+                    <i class="fas fa-gamepad"></i>
+                    <div class="divider"></div>
+                    <span>Roblox</span>
+                </button>
+                <button class="nav-item" onclick="showSection('tools')">
+                    <i class="fas fa-tools"></i>
+                    <div class="divider"></div>
+                    <span>Tools</span>
+                </button>
+                <button class="nav-item" onclick="showSection('paths')">
+                    <i class="fas fa-folder"></i>
+                    <div class="divider"></div>
+                    <span>Paths</span>
+                </button>
+                <button class="nav-item" onclick="showSection('advanced')">
+                    <i class="fas fa-microscope"></i>
+                    <div class="divider"></div>
+                    <span>Advanced</span>
+                </button>
+                <button class="nav-item" onclick="showSection('theme')">
+                    <i class="fas fa-palette"></i>
+                    <div class="divider"></div>
+                    <span>Theme</span>
+                </button>
+                <button class="nav-item" onclick="showSection('backup')">
+                    <i class="fas fa-save"></i>
+                    <div class="divider"></div>
+                    <span>Backup</span>
+                </button>
+                <button class="nav-item" onclick="openLogLocation()">
+                    <i class="fas fa-file-alt"></i>
+                    <div class="divider"></div>
+                    <span>Logs</span>
+                </button>
+                
+                <!-- Sidebar Action Buttons -->
+                <div class="sidebar-actions">
+                    <button class="sidebar-btn btn-success" onclick="saveLauncherFiles()">
+                        <i class="fas fa-play"></i>
+                        <div class="divider"></div>
+                        <span>Save and Run</span>
+                    </button>
+                    <button class="sidebar-btn btn-primary" onclick="saveOnly()">
+                        <i class="fas fa-save"></i>
+                        <div class="divider"></div>
+                        <span>Save Only</span>
+                    </button>
+                    <button class="sidebar-btn btn-secondary" onclick="cancel()">
+                        <i class="fas fa-times"></i>
+                        <div class="divider"></div>
+                        <span>Cancel</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="content">
+                <!-- Profiles Section -->
+                <div id="profiles" class="section active">
+                    <h2>Configuration Profiles</h2>
+                    <div class="profile-cards">
+                        <div class="profile-card" onclick="selectProfile('default')">
+                            <div class="profile-card-header">
+                                <i class="fas fa-star"></i>
+                                <div class="divider"></div>
+                                <h3>Default</h3>
+                            </div>
+                            <p>Balanced cleaning with essential features. Recommended for most users.</p>
+                        </div>
+                        <div class="profile-card" onclick="selectProfile('aggressive')">
+                            <div class="profile-card-header">
+                                <i class="fas fa-fire"></i>
+                                <div class="divider"></div>
+                                <h3>Aggressive</h3>
+                            </div>
+                            <p>Maximum cleaning with all features enabled. For deep cleaning scenarios.</p>
+                        </div>
+                        <div class="profile-card" onclick="selectProfile('minimal')">
+                            <div class="profile-card-header">
+                                <i class="fas fa-feather"></i>
+                                <div class="divider"></div>
+                                <h3>Minimal</h3>
+                            </div>
+                            <p>Basic cleaning only. Safe option with minimal system impact.</p>
+                        </div>
+                        <div class="profile-card" onclick="selectProfile('custom')">
+                            <div class="profile-card-header">
+                                <i class="fas fa-bolt"></i>
+                                <div class="divider"></div>
+                                <h3>Custom</h3>
+                            </div>
+                            <p>Create your own configuration with custom settings.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- General Section -->
+                <div id="general" class="section">
+                    <h2>General Settings</h2>
+                    <div class="config-group">
+                        <h3>Logging</h3>
+                        <div class="config-item">
+                            <div>
+                                <div class="config-label">Enable Logging</div>
+                                <div class="config-description">Save detailed logs of all operations</div>
+                            </div>
+                            <div id="logging-enabled" class="toggle-switch active" onclick="toggleSwitch(this)"></div>
+                        </div>
+                        <div class="config-item">
+                            <div>
+                                <div class="config-label">Open Log on Exit</div>
+                                <div class="config-description">Automatically open log file when cleaning completes</div>
+                            </div>
+                            <div id="open-log-on-exit" class="toggle-switch" onclick="toggleSwitch(this)"></div>
+                        </div>
+                        <div class="config-item">
+                            <div>
+                                <div class="config-label">Capture Console History</div>
+                                <div class="config-description">Include previous console content in logs</div>
+                            </div>
+                            <div id="capture-console-history" class="toggle-switch active" onclick="toggleSwitch(this)"></div>
+                        </div>
+                    </div>
+
+                    <div class="config-group">
+                        <h3>Display</h3>
+                        <div class="config-item">
+                            <div>
+                                <div class="config-label">Clear Screen on Sections</div>
+                                <div class="config-description">Clear console between major operations</div>
+                            </div>
+                            <div class="toggle-switch active" onclick="toggleSwitch(this)"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cleaning Section -->
+                <div id="cleaning" class="section">
+                    <h2>Cleaning Options</h2>
+                    <div class="config-group">
+                        <h3>Core Cleaning</h3>
+                        <div class="config-item">
+                            <div>
+                                <div class="config-label">Kill Processes</div>
+                                <div class="config-description">Terminate all Roblox processes</div>
+                            </div>
+                            <div class="toggle-switch active" onclick="toggleSwitch(this)"></div>
+                        </div>
+                        <div class="config-item">
+                            <div>
+                                <div class="config-label">Clean Registry</div>
+                                <div class="config-description">Remove Roblox registry entries</div>
+                            </div>
+                            <div class="toggle-switch active" onclick="toggleSwitch(this)"></div>
+                        </div>
+                        <div class="config-item">
+                            <div>
+                                <div class="config-label">Clean Temp Files</div>
+                                <div class="config-description">Remove temporary files and folders</div>
+                            </div>
+                            <div class="toggle-switch active" onclick="toggleSwitch(this)"></div>
+                        </div>
+                    </div>
+
+                    <div class="config-group">
+                        <h3>Advanced Cleaning</h3>
+                        <div class="config-item">
+                            <div>
+                                <div class="config-label">Clean Browser Data</div>
+                                <div class="config-description">Remove browser cookies and cache</div>
+                            </div>
+                            <div class="toggle-switch" onclick="toggleSwitch(this)"></div>
+                        </div>
+                        <div class="config-item">
+                            <div>
+                                <div class="config-label">Clean Discord Cache</div>
+                                <div class="config-description">Remove Discord application cache</div>
+                            </div>
+                            <div class="toggle-switch" onclick="toggleSwitch(this)"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Roblox Section -->
+                <div id="roblox" class="section">
+                    <h2>Roblox Settings</h2>
+                    <div class="config-group">
+                        <h3>Installation Paths</h3>
+                        <div class="config-item">
+                            <div>
+                                <div class="config-label">Roblox Player Path</div>
+                                <div class="config-description">Custom path to Roblox Player executable</div>
+                            </div>
+                            <input type="text" class="text-input" placeholder="%LOCALAPPDATA%\Roblox" />
+                        </div>
+                        <div class="config-item">
+                            <div>
+                                <div class="config-label">Roblox Studio Path</div>
+                                <div class="config-description">Custom path to Roblox Studio executable</div>
+                            </div>
+                            <input type="text" class="text-input" placeholder="%LOCALAPPDATA%\RobloxStudio" />
+                        </div>
+                    </div>
+
+                    <div class="config-group">
+                        <h3>Behavior</h3>
+                        <div class="config-item">
+                            <div>
+                                <div class="config-label">Auto-start Roblox</div>
+                                <div class="config-description">Automatically launch Roblox after cleaning</div>
+                            </div>
+                            <div class="toggle-switch" onclick="toggleSwitch(this)"></div>
+                        </div>
+                        <div class="config-item">
+                            <div>
+                                <div class="config-label">Use Custom Launcher</div>
+                                <div class="config-description">Use modified Roblox launcher</div>
+                            </div>
+                            <div class="toggle-switch" onclick="toggleSwitch(this)"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tools Section -->
+                <div id="tools" class="section">
+                    <h2>Tools & Utilities</h2>
+                    <div class="config-group">
+                        <h3>System Tools</h3>
+                        <div class="config-item">
+                            <div>
+                                <div class="config-label">Process Monitor</div>
+                                <div class="config-description">Monitor system processes during cleaning</div>
+                            </div>
+                            <div class="toggle-switch" onclick="toggleSwitch(this)"></div>
+                        </div>
+                        <div class="config-item">
+                            <div>
+                                <div class="config-label">Network Scanner</div>
+                                <div class="config-description">Scan for network connections</div>
+                            </div>
+                            <div class="toggle-switch" onclick="toggleSwitch(this)"></div>
+                        </div>
+                        <div class="config-item">
+                            <div>
+                                <div class="config-label">File Analyzer</div>
+                                <div class="config-description">Analyze suspicious files</div>
+                            </div>
+                            <div class="toggle-switch" onclick="toggleSwitch(this)"></div>
+                        </div>
+                    </div>
+
+                    <div class="config-group">
+                        <h3>External Tools</h3>
+                        <div class="config-item">
+                            <div>
+                                <div class="config-label">Enable External Tools</div>
+                                <div class="config-description">Allow integration with external utilities</div>
+                            </div>
+                            <div class="toggle-switch" onclick="toggleSwitch(this)"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Paths Section -->
+                <div id="paths" class="section">
+                    <h2>Path Configuration</h2>
+                    <div class="config-group">
+                        <h3>System Paths</h3>
+                        <div class="config-item">
+                            <div>
+                                <div class="config-label">Temp Directory</div>
+                                <div class="config-description">Custom temporary directory path</div>
+                            </div>
+                            <input type="text" class="text-input" placeholder="%TEMP%" />
+                        </div>
+                        <div class="config-item">
+                            <div>
+                                <div class="config-label">Log Directory</div>
+                                <div class="config-description">Custom log file directory</div>
+                            </div>
+                            <input type="text" class="text-input" placeholder="./logs" />
+                        </div>
+                        <div class="config-item">
+                            <div>
+                                <div class="config-label">Backup Directory</div>
+                                <div class="config-description">Custom backup storage location</div>
+                            </div>
+                            <input type="text" class="text-input" placeholder="./backups" />
+                        </div>
+                    </div>
+
+                    <div class="config-group">
+                        <h3>Custom Paths</h3>
+                        <div class="list-editor">
+                            <div class="list-item">
+                                <span>%APPDATA%\Roblox</span>
+                                <button class="btn btn-sm btn-danger" onclick="removeListItem(this)">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                            <div class="list-item">
+                                <span>%LOCALAPPDATA%\Roblox</span>
+                                <button class="btn btn-sm btn-danger" onclick="removeListItem(this)">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                            <button class="btn btn-sm btn-primary" onclick="addListItem()">
+                                <i class="fas fa-plus"></i> Add Path
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Advanced Section -->
+                <div id="advanced" class="section">
+                    <h2>Advanced Settings</h2>
+                    <div class="config-group">
+                        <h3>Performance</h3>
+                        <div class="config-item">
+                            <div>
+                                <div class="config-label">Thread Count</div>
+                                <div class="config-description">Number of parallel threads for operations</div>
+                            </div>
+                            <input type="text" class="text-input" placeholder="Auto" />
+                        </div>
+                        <div class="config-item">
+                            <div>
+                                <div class="config-label">Timeout (seconds)</div>
+                                <div class="config-description">Operation timeout in seconds</div>
+                            </div>
+                            <input type="text" class="text-input" placeholder="30" />
+                        </div>
+                    </div>
+
+                    <div class="config-group">
+                        <h3>Security</h3>
+                        <div class="config-item">
+                            <div>
+                                <div class="config-label">Enable Sandbox</div>
+                                <div class="config-description">Run operations in isolated environment</div>
+                            </div>
+                            <div class="toggle-switch" onclick="toggleSwitch(this)"></div>
+                        </div>
+                        <div class="config-item">
+                            <div>
+                                <div class="config-label">Verify Signatures</div>
+                                <div class="config-description">Check digital signatures of files</div>
+                            </div>
+                            <div class="toggle-switch" onclick="toggleSwitch(this)"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Theme Section -->
+                <div id="theme" class="section">
+                    <h2>Theme Customization</h2>
+                    <div class="config-group">
+                        <h3>Theme Presets</h3>
+                        <div class="theme-presets">
+                            <div class="theme-preset" onclick="selectTheme('slate')">
+                                <div class="theme-preview slate-preview"></div>
+                                <h4>Slate</h4>
+                                <p>Default dark theme</p>
+                            </div>
+                            <div class="theme-preset" onclick="selectTheme('obsidian')">
+                                <div class="theme-preview obsidian-preview"></div>
+                                <h4>Obsidian</h4>
+                                <p>GitHub-inspired dark</p>
+                            </div>
+                            <div class="theme-preset" onclick="selectTheme('github')">
+                                <div class="theme-preview github-preview"></div>
+                                <h4>GitHub</h4>
+                                <p>Classic GitHub theme</p>
+                            </div>
+                            <div class="theme-preset" onclick="selectTheme('vscode')">
+                                <div class="theme-preview vscode-preview"></div>
+                                <h4>VS Code</h4>
+                                <p>Editor-inspired theme</p>
+                            </div>
+                            <div class="theme-preset" onclick="selectTheme('nord')">
+                                <div class="theme-preview nord-preview"></div>
+                                <h4>Nord</h4>
+                                <p>Nordic color palette</p>
+                            </div>
+                            <div class="theme-preset" onclick="selectTheme('dracula')">
+                                <div class="theme-preview dracula-preview"></div>
+                                <h4>Dracula</h4>
+                                <p>Popular dark theme</p>
+                            </div>
+                            <div class="theme-preset" onclick="selectTheme('light')">
+                                <div class="theme-preview light-preview"></div>
+                                <h4>Light</h4>
+                                <p>Clean light theme</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="config-group">
+                        <h3>Custom Colors</h3>
+                        <div class="color-grid">
+                            <div class="color-input-group">
+                                <label>Primary Background</label>
+                                <div style="display: flex; gap: 8px; align-items: center;">
+                                    <input type="color" value="#0a0a0a" onchange="updateColor('bg-primary', this.value)">
+                                    <input type="text" class="color-text" value="#0a0a0a" onchange="updateColorFromText('bg-primary', this.value)">
+                                </div>
+                            </div>
+                            <div class="color-input-group">
+                                <label>Secondary Background</label>
+                                <div style="display: flex; gap: 8px; align-items: center;">
+                                    <input type="color" value="#0f0f0f" onchange="updateColor('bg-secondary', this.value)">
+                                    <input type="text" class="color-text" value="#0f0f0f" onchange="updateColorFromText('bg-secondary', this.value)">
+                                </div>
+                            </div>
+                            <div class="color-input-group">
+                                <label>Accent Color</label>
+                                <div style="display: flex; gap: 8px; align-items: center;">
+                                    <input type="color" value="#dc143c" onchange="updateColor('accent-primary', this.value)">
+                                    <input type="text" class="color-text" value="#dc143c" onchange="updateColorFromText('accent-primary', this.value)">
+                                </div>
+                            </div>
+                            <div class="color-input-group">
+                                <label>Text Primary</label>
+                                <div style="display: flex; gap: 8px; align-items: center;">
+                                    <input type="color" value="#e0e0e0" onchange="updateColor('text-primary', this.value)">
+                                    <input type="text" class="color-text" value="#e0e0e0" onchange="updateColorFromText('text-primary', this.value)">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Backup Section -->
+                <div id="backup" class="section">
+                    <h2>Backup & Restore</h2>
+                    <div class="config-group">
+                        <h3>Automatic Backup</h3>
+                        <div class="config-item">
+                            <div>
+                                <div class="config-label">Enable Auto Backup</div>
+                                <div class="config-description">Automatically backup configuration before changes</div>
+                            </div>
+                            <div class="toggle-switch active" onclick="toggleSwitch(this)"></div>
+                        </div>
+                        <div class="config-item">
+                            <div>
+                                <div class="config-label">Backup Frequency</div>
+                                <div class="config-description">How often to create automatic backups</div>
+                            </div>
+                            <select class="text-input">
+                                <option>Daily</option>
+                                <option>Weekly</option>
+                                <option>Monthly</option>
+                            </select>
+                        </div>
+                        <div class="config-item">
+                            <div>
+                                <div class="config-label">Max Backups</div>
+                                <div class="config-description">Maximum number of backups to keep</div>
+                            </div>
+                            <input type="text" class="text-input" placeholder="10" />
+                        </div>
+                    </div>
+
+                    <div class="config-group">
+                        <h3>Manual Backup</h3>
+                        <div class="action-buttons">
+                            <button class="btn btn-primary" onclick="createBackup()">
+                                <i class="fas fa-download"></i> Create Backup
+                            </button>
+                            <button class="btn btn-secondary" onclick="restoreBackup()">
+                                <i class="fas fa-upload"></i> Restore Backup
+                            </button>
+                            <div class="file-input-wrapper">
+                                <input type="file" id="backup-file" accept=".json" onchange="loadBackup(event)">
+                                <label for="backup-file" class="file-input-label">
+                                    <i class="fas fa-folder-open"></i> Load Backup File
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="status-bar">
+            <div class="status-indicator">
+                <div class="status-dot"></div>
+                <span>Configuration Ready</span>
+            </div>
+            <div>
+                <span id="last-saved">Last saved: Never</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <h3 id="modal-title">Confirm Action</h3>
+            <p id="modal-message">Are you sure you want to proceed?</p>
+            <div class="modal-buttons">
+                <button class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+                <button class="btn btn-primary" id="modal-confirm" onclick="confirmModalAction()">Confirm</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Configuration state
+        let config = {
+            profile: 'default',
+            logging: {
+                enabled: true,
+                openOnExit: false,
+                captureHistory: true
+            },
+            cleaning: {
+                killProcesses: true,
+                cleanRegistry: true,
+                cleanTempFiles: true,
+                cleanBrowserData: false,
+                cleanDiscordCache: false
+            },
+            roblox: {
+                autoStart: false,
+                useCustomLauncher: false,
+                playerPath: '%LOCALAPPDATA%\\Roblox',
+                studioPath: '%LOCALAPPDATA%\\RobloxStudio'
+            },
+            tools: {
+                processMonitor: false,
+                networkScanner: false,
+                fileAnalyzer: false,
+                externalTools: false
+            },
+            paths: {
+                tempDir: '%TEMP%',
+                logDir: './logs',
+                backupDir: './backups',
+                customPaths: ['%APPDATA%\\Roblox', '%LOCALAPPDATA%\\Roblox']
+            },
+            advanced: {
+                threadCount: 'Auto',
+                timeout: 30,
+                sandbox: false,
+                verifySignatures: false
+            },
+            backup: {
+                autoBackup: true,
+                frequency: 'Daily',
+                maxBackups: 10
+            },
+            theme: {
+                preset: 'slate',
+                colors: {
+                    'bg-primary': '#0a0a0a',
+                    'bg-secondary': '#0f0f0f',
+                    'accent-primary': '#dc143c',
+                    'text-primary': '#e0e0e0'
+                }
+            }
+        };
+
+        // Section navigation
+        function showSection(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Remove active class from all nav items
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Add active class to clicked nav item
+            event.target.closest('.nav-item').classList.add('active');
+        }
+
+        // Profile selection
+        function selectProfile(profileName) {
+            // Remove selected class from all cards
+            document.querySelectorAll('.profile-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            
+            // Add selected class to clicked card
+            event.target.closest('.profile-card').classList.add('selected');
+            
+            config.profile = profileName;
+            applyProfile(profileName);
+        }
+
+        function applyProfile(profileName) {
+            switch(profileName) {
+                case 'default':
+                    // Apply default settings
+                    break;
+                case 'aggressive':
+                    // Enable all cleaning options
+                    break;
+                case 'minimal':
+                    // Enable only basic cleaning
+                    break;
+                case 'custom':
+                    // Load custom settings
+                    break;
+            }
+        }
+
+        // Toggle switches
+        function toggleSwitch(element) {
+            element.classList.toggle('active');
+            const isActive = element.classList.contains('active');
+            
+            // Update config based on element ID
+            const id = element.id;
+            if (id.startsWith('logging-')) {
+                const setting = id.replace('logging-', '');
+                config.logging[setting] = isActive;
+            }
+        }
+
+        // Theme selection
+        function selectTheme(themeName) {
+            config.theme.preset = themeName;
+            // Apply theme colors
+            const themes = {
+                slate: {
+                    'bg-primary': '#0a0a0a',
+                    'bg-secondary': '#0f0f0f',
+                    'accent-primary': '#dc143c',
+                    'text-primary': '#e0e0e0'
+                },
+                obsidian: {
+                    'bg-primary': '#0d1117',
+                    'bg-secondary': '#161b22',
+                    'accent-primary': '#1f6feb',
+                    'text-primary': '#f0f6fc'
+                },
+                github: {
+                    'bg-primary': '#0d1117',
+                    'bg-secondary': '#21262d',
+                    'accent-primary': '#58a6ff',
+                    'text-primary': '#f0f6fc'
+                },
+                vscode: {
+                    'bg-primary': '#1e1e1e',
+                    'bg-secondary': '#252526',
+                    'accent-primary': '#007acc',
+                    'text-primary': '#cccccc'
+                },
+                nord: {
+                    'bg-primary': '#2e3440',
+                    'bg-secondary': '#3b4252',
+                    'accent-primary': '#88c0d0',
+                    'text-primary': '#d8dee9'
+                },
+                dracula: {
+                    'bg-primary': '#282a36',
+                    'bg-secondary': '#44475a',
+                    'accent-primary': '#bd93f9',
+                    'text-primary': '#f8f8f2'
+                },
+                light: {
+                    'bg-primary': '#ffffff',
+                    'bg-secondary': '#f6f8fa',
+                    'accent-primary': '#0366d6',
+                    'text-primary': '#24292e'
+                }
+            };
+            
+            const theme = themes[themeName];
+            if (theme) {
+                Object.keys(theme).forEach(key => {
+                    updateColor(key, theme[key]);
+                });
+            }
+        }
+
+        // Color updates
+        function updateColor(property, value) {
+            document.documentElement.style.setProperty(`--${property}`, value);
+            config.theme.colors[property] = value;
+            
+            // Update text input if exists
+            const textInput = document.querySelector(`input[onchange*="${property}"]`);
+            if (textInput) {
+                textInput.value = value;
+            }
+        }
+
+        function updateColorFromText(property, value) {
+            updateColor(property, value);
+            
+            // Update color picker if exists
+            const colorPicker = document.querySelector(`input[onchange*="${property}"][type="color"]`);
+            if (colorPicker) {
+                colorPicker.value = value;
+            }
+        }
+
+        // List management
+        function addListItem() {
+            const listEditor = event.target.closest('.list-editor');
+            const newItem = document.createElement('div');
+            newItem.className = 'list-item';
+            newItem.innerHTML = `
+                <input type="text" class="text-input" placeholder="Enter path..." style="flex: 1; margin-right: 8px;">
+                <button class="btn btn-sm btn-danger" onclick="removeListItem(this)">
+                    <i class="fas fa-trash"></i>
+                </button>
+            `;
+            listEditor.insertBefore(newItem, event.target);
+        }
+
+        function removeListItem(button) {
+            button.closest('.list-item').remove();
+        }
+
+        // Modal functions
+        function showModal(title, message, confirmAction) {
+            document.getElementById('modal-title').textContent = title;
+            document.getElementById('modal-message').textContent = message;
+            document.getElementById('modal').style.display = 'block';
+            
+            // Store confirm action
+            window.modalConfirmAction = confirmAction;
+        }
+
+        function closeModal() {
+            document.getElementById('modal').style.display = 'none';
+        }
+
+        function confirmModalAction() {
+            if (window.modalConfirmAction) {
+                window.modalConfirmAction();
+            }
+            closeModal();
+        }
+
+        // Action functions
+        function saveLauncherFiles() {
+            showModal('Save and Run', 'Save configuration and launch Slate?', () => {
+                // Save configuration logic here
+                updateLastSaved();
+                console.log('Configuration saved and launching...');
+            });
+        }
+
+        function saveOnly() {
+            // Save configuration logic here
+            updateLastSaved();
+            console.log('Configuration saved');
+        }
+
+        function cancel() {
+            showModal('Cancel', 'Discard unsaved changes?', () => {
+                console.log('Changes discarded');
+            });
+        }
+
+        function createBackup() {
+            const backupData = JSON.stringify(config, null, 2);
+            const blob = new Blob([backupData], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `slate-config-backup-${new Date().toISOString().split('T')[0]}.json`;
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        function restoreBackup() {
+            showModal('Restore Backup', 'This will overwrite current settings. Continue?', () => {
+                console.log('Backup restored');
+            });
+        }
+
+        function loadBackup(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    try {
+                        const backupConfig = JSON.parse(e.target.result);
+                        config = { ...config, ...backupConfig };
+                        console.log('Backup loaded successfully');
+                    } catch (error) {
+                        console.error('Invalid backup file:', error);
+                    }
+                };
+                reader.readAsText(file);
+            }
+        }
+
+        function openLogLocation() {
+            console.log('Opening log location...');
+        }
+
+        function updateLastSaved() {
+            const now = new Date();
+            document.getElementById('last-saved').textContent = `Last saved: ${now.toLocaleString()}`;
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('modal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            // Apply initial theme
+            selectTheme('slate');
+        });
+    </script>
+</body>
+</html>
