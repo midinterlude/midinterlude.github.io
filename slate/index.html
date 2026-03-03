@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Slate - Configuration Manager</title>
-    <link rel="icon" href="../new.ico" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
@@ -791,7 +790,7 @@
     <div class="container">
         <div class="header">
             <pre style="font-family: monospace; font-size: 1rem; line-height: 1; color: var(--text-primary); white-space: pre; text-align: left;">
-▐▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▌
+▐▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▌
 ▐     ▄████████  ▄█          ▄████████     ███        ▄████████  ▌
 ▐    ███    ███ ███         ███    ███ ▀█████████▄   ███    ███  ▌
 ▐    ███    █▀  ███         ███    ███    ▀███▀▀██   ███    █▀   ▌
@@ -801,7 +800,7 @@
 ▐     ▄█    ███ ███▌    ▄   ███    ███     ███       ███    ███  ▌
 ▐   ▄████████▀  █████▄▄██   ███    █▀     ▄████▀     ██████████  ▌
 ▐               ▀                                                ▌
-▐▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▌
+▐▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▌
             </pre>
             <p style="text-align: left;">Advanced Configuration Web Interface - by midinterlude (on discord)</p>
         </div>
@@ -969,7 +968,28 @@
                                 <div class="config-label">Kill Processes</div>
                                 <div class="config-description">Terminate all Roblox processes</div>
                             </div>
-                            <div class="toggle-switch active" onclick="toggleSwitch(this)"></div>
+                            <div id="kill-processes" class="toggle-switch active" onclick="toggleSwitch(this)"></div>
+                        </div>
+                        <div class="config-item">
+                            <div>
+                                <div class="config-label">Clean Folders</div>
+                                <div class="config-description">Remove temporary and cache folders</div>
+                            </div>
+                            <div id="clean-folders" class="toggle-switch active" onclick="toggleSwitch(this)"></div>
+                        </div>
+                        <div class="config-item">
+                            <div>
+                                <div class="config-label">Remove Cookies</div>
+                                <div class="config-description">Delete Roblox cookies and local storage</div>
+                            </div>
+                            <div id="remove-cookies" class="toggle-switch active" onclick="toggleSwitch(this)"></div>
+                        </div>
+                        <div class="config-item">
+                            <div>
+                                <div class="config-label">Flush DNS</div>
+                                <div class="config-description">Clear DNS cache</div>
+                            </div>
+                            <div id="flush-dns" class="toggle-switch active" onclick="toggleSwitch(this)"></div>
                         </div>
                         <div class="config-item">
                             <div>
@@ -980,26 +1000,19 @@
                         </div>
                         <div class="config-item">
                             <div>
-                                <div class="config-label">Clean Temp Files</div>
-                                <div class="config-description">Remove temporary files and folders</div>
+                                <div class="config-label">Clean Prefetch</div>
+                                <div class="config-description">Remove Windows prefetch files</div>
                             </div>
                             <div class="toggle-switch active" onclick="toggleSwitch(this)"></div>
                         </div>
                     </div>
 
                     <div class="config-group">
-                        <h3>Advanced Cleaning</h3>
+                        <h3>System</h3>
                         <div class="config-item">
                             <div>
-                                <div class="config-label">Clean Browser Data</div>
-                                <div class="config-description">Remove browser cookies and cache</div>
-                            </div>
-                            <div class="toggle-switch" onclick="toggleSwitch(this)"></div>
-                        </div>
-                        <div class="config-item">
-                            <div>
-                                <div class="config-label">Clean Discord Cache</div>
-                                <div class="config-description">Remove Discord application cache</div>
+                                <div class="config-label">Restart Explorer</div>
+                                <div class="config-description">Restart Windows Explorer after cleaning</div>
                             </div>
                             <div class="toggle-switch" onclick="toggleSwitch(this)"></div>
                         </div>
@@ -1010,38 +1023,27 @@
                 <div id="roblox" class="section">
                     <h2>Roblox Settings</h2>
                     <div class="config-group">
-                        <h3>Installation Paths</h3>
+                        <h3>Client Management</h3>
                         <div class="config-item">
                             <div>
-                                <div class="config-label">Roblox Player Path</div>
-                                <div class="config-description">Custom path to Roblox Player executable</div>
+                                <div class="config-label">Download Roblox</div>
+                                <div class="config-description">Download latest Roblox client after cleaning</div>
                             </div>
-                            <input type="text" class="text-input" placeholder="%LOCALAPPDATA%\Roblox" />
+                            <div class="toggle-switch active" onclick="toggleSwitch(this)"></div>
                         </div>
                         <div class="config-item">
                             <div>
-                                <div class="config-label">Roblox Studio Path</div>
-                                <div class="config-description">Custom path to Roblox Studio executable</div>
-                            </div>
-                            <input type="text" class="text-input" placeholder="%LOCALAPPDATA%\RobloxStudio" />
-                        </div>
-                    </div>
-
-                    <div class="config-group">
-                        <h3>Behavior</h3>
-                        <div class="config-item">
-                            <div>
-                                <div class="config-label">Auto-start Roblox</div>
-                                <div class="config-description">Automatically launch Roblox after cleaning</div>
+                                <div class="config-label">Launch Roblox on Exit</div>
+                                <div class="config-description">Start Roblox when cleaning completes</div>
                             </div>
                             <div class="toggle-switch" onclick="toggleSwitch(this)"></div>
                         </div>
                         <div class="config-item">
                             <div>
-                                <div class="config-label">Use Custom Launcher</div>
-                                <div class="config-description">Use modified Roblox launcher</div>
+                                <div class="config-label">Create AppSettings</div>
+                                <div class="config-description">Generate AppSettings.xml file</div>
                             </div>
-                            <div class="toggle-switch" onclick="toggleSwitch(this)"></div>
+                            <div class="toggle-switch active" onclick="toggleSwitch(this)"></div>
                         </div>
                     </div>
                 </div>
@@ -1050,88 +1052,61 @@
                 <div id="tools" class="section">
                     <h2>Tools & Utilities</h2>
                     <div class="config-group">
-                        <h3>System Tools</h3>
+                        <h3>Third-party Tools</h3>
                         <div class="config-item">
                             <div>
-                                <div class="config-label">Process Monitor</div>
-                                <div class="config-description">Monitor system processes during cleaning</div>
+                                <div class="config-label">Run ByeBanAsync</div>
+                                <div class="config-description">Execute ByeBanAsync for additional cleaning</div>
                             </div>
-                            <div class="toggle-switch" onclick="toggleSwitch(this)"></div>
-                        </div>
-                        <div class="config-item">
-                            <div>
-                                <div class="config-label">Network Scanner</div>
-                                <div class="config-description">Scan for network connections</div>
-                            </div>
-                            <div class="toggle-switch" onclick="toggleSwitch(this)"></div>
-                        </div>
-                        <div class="config-item">
-                            <div>
-                                <div class="config-label">File Analyzer</div>
-                                <div class="config-description">Analyze suspicious files</div>
-                            </div>
-                            <div class="toggle-switch" onclick="toggleSwitch(this)"></div>
-                        </div>
-                    </div>
-
-                    <div class="config-group">
-                        <h3>External Tools</h3>
-                        <div class="config-item">
-                            <div>
-                                <div class="config-label">Enable External Tools</div>
-                                <div class="config-description">Allow integration with external utilities</div>
-                            </div>
-                            <div class="toggle-switch" onclick="toggleSwitch(this)"></div>
+                            <div id="run-bye-ban-async" class="toggle-switch active" onclick="toggleSwitch(this)"></div>
                         </div>
                     </div>
                 </div>
 
                 <!-- Paths Section -->
                 <div id="paths" class="section">
-                    <h2>Path Configuration</h2>
+                    <h2>Paths & Directories</h2>
                     <div class="config-group">
-                        <h3>System Paths</h3>
-                        <div class="config-item">
-                            <div>
-                                <div class="config-label">Temp Directory</div>
-                                <div class="config-description">Custom temporary directory path</div>
+                        <h3>Temporary Folders</h3>
+                        <div class="list-editor" id="temp-folders">
+                            <div class="list-item">
+                                <span>%temp%</span>
+                                <button class="btn btn-danger btn-sm" onclick="removeListItem(this)">Remove</button>
                             </div>
-                            <input type="text" class="text-input" placeholder="%TEMP%" />
-                        </div>
-                        <div class="config-item">
-                            <div>
-                                <div class="config-label">Log Directory</div>
-                                <div class="config-description">Custom log file directory</div>
+                            <div class="list-item">
+                                <span>%temp%/*</span>
+                                <button class="btn btn-danger btn-sm" onclick="removeListItem(this)">Remove</button>
                             </div>
-                            <input type="text" class="text-input" placeholder="./logs" />
-                        </div>
-                        <div class="config-item">
-                            <div>
-                                <div class="config-label">Backup Directory</div>
-                                <div class="config-description">Custom backup storage location</div>
+                            <div class="list-item">
+                                <span>%localappdata%\Temp</span>
+                                <button class="btn btn-danger btn-sm" onclick="removeListItem(this)">Remove</button>
                             </div>
-                            <input type="text" class="text-input" placeholder="./backups" />
+                            <div style="margin-top: 10px;">
+                                <input type="text" class="text-input" id="new-temp-folder" placeholder="Enter new path">
+                                <button class="btn btn-primary btn-sm" onclick="addListItem('temp-folders', 'new-temp-folder')">Add</button>
+                            </div>
                         </div>
                     </div>
 
                     <div class="config-group">
-                        <h3>Custom Paths</h3>
-                        <div class="list-editor">
+                        <h3>Roblox Folders</h3>
+                        <div class="list-editor" id="roblox-folders">
                             <div class="list-item">
-                                <span>%APPDATA%\Roblox</span>
-                                <button class="btn btn-sm btn-danger" onclick="removeListItem(this)">
-                                    <i class="fas fa-trash"></i>
-                                </button>
+                                <span>%localappdata%\Roblox</span>
+                                <button class="btn btn-danger btn-sm" onclick="removeListItem(this)">Remove</button>
                             </div>
                             <div class="list-item">
-                                <span>%LOCALAPPDATA%\Roblox</span>
-                                <button class="btn btn-sm btn-danger" onclick="removeListItem(this)">
-                                    <i class="fas fa-trash"></i>
-                                </button>
+                                <span>%appdata%\Roblox</span>
+                                <button class="btn btn-danger btn-sm" onclick="removeListItem(this)">Remove</button>
                             </div>
-                            <button class="btn btn-sm btn-primary" onclick="addListItem()">
-                                <i class="fas fa-plus"></i> Add Path
-                            </button>
+                            <div class="list-item">
+                                <span>%appdata%\Local\Roblox</span>
+                                <button class="btn btn-danger btn-sm" onclick="removeListItem(this)">Remove</button>
+                            </div>
+                            <div style="margin-top: 10px;">
+                                <input type="text" class="text-input" id="new-roblox-folder" placeholder="Enter new path">
+                                <button class="btn btn-primary btn-sm" onclick="addListItem('roblox-folders', 'new-roblox-folder')">Add</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1140,36 +1115,32 @@
                 <div id="advanced" class="section">
                     <h2>Advanced Settings</h2>
                     <div class="config-group">
-                        <h3>Performance</h3>
+                        <h3>Behavior</h3>
                         <div class="config-item">
                             <div>
-                                <div class="config-label">Thread Count</div>
-                                <div class="config-description">Number of parallel threads for operations</div>
+                                <div class="config-label">Show Command Output</div>
+                                <div class="config-description">Display detailed command execution output</div>
                             </div>
-                            <input type="text" class="text-input" placeholder="Auto" />
+                            <div class="toggle-switch active" onclick="toggleSwitch(this)"></div>
                         </div>
                         <div class="config-item">
                             <div>
-                                <div class="config-label">Timeout (seconds)</div>
-                                <div class="config-description">Operation timeout in seconds</div>
+                                <div class="config-label">Force File Deletion</div>
+                                <div class="config-description">Attempt to remove read-only files</div>
                             </div>
-                            <input type="text" class="text-input" placeholder="30" />
+                            <div class="toggle-switch active" onclick="toggleSwitch(this)"></div>
                         </div>
-                    </div>
-
-                    <div class="config-group">
-                        <h3>Security</h3>
                         <div class="config-item">
                             <div>
-                                <div class="config-label">Enable Sandbox</div>
-                                <div class="config-description">Run operations in isolated environment</div>
+                                <div class="config-label">Skip Confirmation Prompts</div>
+                                <div class="config-description">Run without asking for confirmation</div>
                             </div>
                             <div class="toggle-switch" onclick="toggleSwitch(this)"></div>
                         </div>
                         <div class="config-item">
                             <div>
-                                <div class="config-label">Verify Signatures</div>
-                                <div class="config-description">Check digital signatures of files</div>
+                                <div class="config-label">Auto Restart After Cleaning</div>
+                                <div class="config-description">Automatically restart computer when done</div>
                             </div>
                             <div class="toggle-switch" onclick="toggleSwitch(this)"></div>
                         </div>
@@ -1179,78 +1150,111 @@
                 <!-- Theme Section -->
                 <div id="theme" class="section">
                     <h2>Theme Customization</h2>
+                    
                     <div class="config-group">
-                        <h3>Theme Presets</h3>
+                        <h3><i class="fas fa-palette"></i> Preset Themes</h3>
                         <div class="theme-presets">
-                            <div class="theme-preset" onclick="selectTheme('slate')">
+                            <div class="theme-preset" onclick="applyTheme('slate')">
                                 <div class="theme-preview slate-preview"></div>
                                 <h4>Slate</h4>
-                                <p>Default dark theme</p>
+                                <p>dark grey with crimson accents</p>
                             </div>
-                            <div class="theme-preset" onclick="selectTheme('obsidian')">
+                            <div class="theme-preset" onclick="applyTheme('obsidian')">
                                 <div class="theme-preview obsidian-preview"></div>
                                 <h4>Obsidian</h4>
-                                <p>GitHub-inspired dark</p>
+                                <p>Dark theme with blue accents</p>
                             </div>
-                            <div class="theme-preset" onclick="selectTheme('github')">
+                            <div class="theme-preset" onclick="applyTheme('github-dark')">
                                 <div class="theme-preview github-preview"></div>
-                                <h4>GitHub</h4>
-                                <p>Classic GitHub theme</p>
+                                <h4>GitHub Dark</h4>
+                                <p>Classic dark interface</p>
                             </div>
-                            <div class="theme-preset" onclick="selectTheme('vscode')">
+                            <div class="theme-preset" onclick="applyTheme('vscode-dark')">
                                 <div class="theme-preview vscode-preview"></div>
-                                <h4>VS Code</h4>
-                                <p>Editor-inspired theme</p>
+                                <h4>VS Code Dark</h4>
+                                <p>Developer favorite</p>
                             </div>
-                            <div class="theme-preset" onclick="selectTheme('nord')">
+                            <div class="theme-preset" onclick="applyTheme('nord')">
                                 <div class="theme-preview nord-preview"></div>
                                 <h4>Nord</h4>
-                                <p>Nordic color palette</p>
+                                <p>Cool blue tones</p>
                             </div>
-                            <div class="theme-preset" onclick="selectTheme('dracula')">
+                            <div class="theme-preset" onclick="applyTheme('dracula')">
                                 <div class="theme-preview dracula-preview"></div>
                                 <h4>Dracula</h4>
-                                <p>Popular dark theme</p>
+                                <p>Purple dark theme</p>
                             </div>
-                            <div class="theme-preset" onclick="selectTheme('light')">
+                            <div class="theme-preset" onclick="applyTheme('light')">
                                 <div class="theme-preview light-preview"></div>
                                 <h4>Light</h4>
-                                <p>Clean light theme</p>
+                                <p>Clean light interface</p>
                             </div>
                         </div>
                     </div>
 
                     <div class="config-group">
-                        <h3>Custom Colors</h3>
+                        <h3><i class="fas fa-paint-brush"></i> Custom Colors</h3>
                         <div class="color-grid">
                             <div class="color-input-group">
                                 <label>Primary Background</label>
-                                <div style="display: flex; gap: 8px; align-items: center;">
-                                    <input type="color" value="#0a0a0a" onchange="updateColor('bg-primary', this.value)">
-                                    <input type="text" class="color-text" value="#0a0a0a" onchange="updateColorFromText('bg-primary', this.value)">
-                                </div>
+                                <input type="color" id="bg-primary" value="#0a0a0a" onchange="updateCustomTheme()">
+                                <input type="text" class="color-text" value="#0a0a0a" onchange="updateColorFromText('bg-primary', this.value)">
                             </div>
                             <div class="color-input-group">
                                 <label>Secondary Background</label>
-                                <div style="display: flex; gap: 8px; align-items: center;">
-                                    <input type="color" value="#0f0f0f" onchange="updateColor('bg-secondary', this.value)">
-                                    <input type="text" class="color-text" value="#0f0f0f" onchange="updateColorFromText('bg-secondary', this.value)">
-                                </div>
+                                <input type="color" id="bg-secondary" value="#0f0f0f" onchange="updateCustomTheme()">
+                                <input type="text" class="color-text" value="#0f0f0f" onchange="updateColorFromText('bg-secondary', this.value)">
+                            </div>
+                            <div class="color-input-group">
+                                <label>Tertiary Background</label>
+                                <input type="color" id="bg-tertiary" value="#151515" onchange="updateCustomTheme()">
+                                <input type="text" class="color-text" value="#151515" onchange="updateColorFromText('bg-tertiary', this.value)">
+                            </div>
+                            <div class="color-input-group">
+                                <label>Elevated Background</label>
+                                <input type="color" id="bg-elevated" value="#1a1a1a" onchange="updateCustomTheme()">
+                                <input type="text" class="color-text" value="#1a1a1a" onchange="updateColorFromText('bg-elevated', this.value)">
+                            </div>
+                            <div class="color-input-group">
+                                <label>Primary Text</label>
+                                <input type="color" id="text-primary" value="#e0e0e0" onchange="updateCustomTheme()">
+                                <input type="text" class="color-text" value="#e0e0e0" onchange="updateColorFromText('text-primary', this.value)">
+                            </div>
+                            <div class="color-input-group">
+                                <label>Secondary Text</label>
+                                <input type="color" id="text-secondary" value="#999999" onchange="updateCustomTheme()">
+                                <input type="text" class="color-text" value="#999999" onchange="updateColorFromText('text-secondary', this.value)">
                             </div>
                             <div class="color-input-group">
                                 <label>Accent Color</label>
-                                <div style="display: flex; gap: 8px; align-items: center;">
-                                    <input type="color" value="#dc143c" onchange="updateColor('accent-primary', this.value)">
-                                    <input type="text" class="color-text" value="#dc143c" onchange="updateColorFromText('accent-primary', this.value)">
-                                </div>
+                                <input type="color" id="accent-primary" value="#dc143c" onchange="updateCustomTheme()">
+                                <input type="text" class="color-text" value="#dc143c" onchange="updateColorFromText('accent-primary', this.value)">
                             </div>
                             <div class="color-input-group">
-                                <label>Text Primary</label>
-                                <div style="display: flex; gap: 8px; align-items: center;">
-                                    <input type="color" value="#e0e0e0" onchange="updateColor('text-primary', this.value)">
-                                    <input type="text" class="color-text" value="#e0e0e0" onchange="updateColorFromText('text-primary', this.value)">
-                                </div>
+                                <label>Border Color</label>
+                                <input type="color" id="border-primary" value="#222222" onchange="updateCustomTheme()">
+                                <input type="text" class="color-text" value="#222222" onchange="updateColorFromText('border-primary', this.value)">
                             </div>
+                            <div class="color-input-group">
+                                <label>Success Color</label>
+                                <input type="color" id="success" value="#26a69a" onchange="updateCustomTheme()">
+                                <input type="text" class="color-text" value="#26a69a" onchange="updateColorFromText('success', this.value)">
+                            </div>
+                            <div class="color-input-group">
+                                <label>Danger Color</label>
+                                <input type="color" id="danger" value="#dc143c" onchange="updateCustomTheme()">
+                                <input type="text" class="color-text" value="#dc143c" onchange="updateColorFromText('danger', this.value)">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="config-group">
+                        <h3><i class="fas fa-bolt"></i> Quick Actions</h3>
+                        <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+                            <button class="btn btn-primary" onclick="exportTheme()"><i class="fas fa-download"></i> Export Theme</button>
+                            <button class="btn btn-secondary" onclick="importTheme()"><i class="fas fa-upload"></i> Import Theme</button>
+                            <button class="btn btn-secondary" onclick="resetTheme()"><i class="fas fa-undo"></i> Reset to Default</button>
+                            <button class="btn btn-secondary" onclick="randomTheme()"><i class="fas fa-dice"></i> Random Theme</button>
                         </div>
                     </div>
                 </div>
@@ -1259,51 +1263,31 @@
                 <div id="backup" class="section">
                     <h2>Backup & Restore</h2>
                     <div class="config-group">
-                        <h3>Automatic Backup</h3>
-                        <div class="config-item">
-                            <div>
-                                <div class="config-label">Enable Auto Backup</div>
-                                <div class="config-description">Automatically backup configuration before changes</div>
+                        <h3>Configuration Management</h3>
+                        <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                            <div class="file-input-wrapper">
+                                <input type="file" id="import-config" accept=".json" onchange="importConfig(event)">
+                                <label for="import-config" class="file-input-label"><i class="fas fa-upload"></i> Import Configuration</label>
                             </div>
-                            <div class="toggle-switch active" onclick="toggleSwitch(this)"></div>
-                        </div>
-                        <div class="config-item">
-                            <div>
-                                <div class="config-label">Backup Frequency</div>
-                                <div class="config-description">How often to create automatic backups</div>
-                            </div>
-                            <select class="text-input">
-                                <option>Daily</option>
-                                <option>Weekly</option>
-                                <option>Monthly</option>
-                            </select>
-                        </div>
-                        <div class="config-item">
-                            <div>
-                                <div class="config-label">Max Backups</div>
-                                <div class="config-description">Maximum number of backups to keep</div>
-                            </div>
-                            <input type="text" class="text-input" placeholder="10" />
+                            <button class="btn btn-primary" onclick="exportConfig()"><i class="fas fa-download"></i> Export Configuration</button>
+                            <button class="btn btn-success" onclick="backupConfig()"><i class="fas fa-save"></i> Create Backup</button>
+                            <button class="btn btn-secondary" onclick="restoreConfig()"><i class="fas fa-history"></i> Restore Backup</button>
                         </div>
                     </div>
 
                     <div class="config-group">
-                        <h3>Manual Backup</h3>
-                        <div class="action-buttons">
-                            <button class="btn btn-primary" onclick="createBackup()">
-                                <i class="fas fa-download"></i> Create Backup
-                            </button>
-                            <button class="btn btn-secondary" onclick="restoreBackup()">
-                                <i class="fas fa-upload"></i> Restore Backup
-                            </button>
-                            <div class="file-input-wrapper">
-                                <input type="file" id="backup-file" accept=".json" onchange="loadBackup(event)">
-                                <label for="backup-file" class="file-input-label">
-                                    <i class="fas fa-folder-open"></i> Load Backup File
-                                </label>
-                            </div>
+                        <h3>Reset Options</h3>
+                        <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                            <button class="btn btn-danger" onclick="resetToDefaults()"><i class="fas fa-undo"></i> Reset to Defaults</button>
+                            <button class="btn btn-danger" onclick="clearAllSettings()"><i class="fas fa-trash"></i> Clear All Settings</button>
                         </div>
                     </div>
+                </div>
+
+                <div class="action-buttons">
+                    <button class="btn btn-success" onclick="saveLauncherFiles()"><i class="fas fa-play"></i> Save and Run</button>
+                    <button class="btn btn-primary" onclick="saveOnly()"><i class="fas fa-save"></i> Save Only</button>
+                    <button class="btn btn-secondary" onclick="cancel()"><i class="fas fa-times"></i> Cancel</button>
                 </div>
             </div>
         </div>
@@ -1311,83 +1295,350 @@
         <div class="status-bar">
             <div class="status-indicator">
                 <div class="status-dot"></div>
-                <span>Configuration Ready</span>
+                <span id="status-text">Configuration loaded successfully</span>
             </div>
-            <div>
-                <span id="last-saved">Last saved: Never</span>
-            </div>
+            <div id="last-saved">Last saved: Never</div>
         </div>
     </div>
 
-    <!-- Modal -->
-    <div id="modal" class="modal">
+    <!-- Confirmation Modal -->
+    <div id="confirmModal" class="modal">
         <div class="modal-content">
             <h3 id="modal-title">Confirm Action</h3>
             <p id="modal-message">Are you sure you want to proceed?</p>
             <div class="modal-buttons">
                 <button class="btn btn-secondary" onclick="closeModal()">Cancel</button>
-                <button class="btn btn-primary" id="modal-confirm" onclick="confirmModalAction()">Confirm</button>
+                <button class="btn btn-primary" id="modal-confirm">Confirm</button>
             </div>
         </div>
     </div>
 
     <script>
-        // Configuration state
+        // Configuration data structure
         let config = {
-            profile: 'default',
-            logging: {
-                enabled: true,
-                openOnExit: false,
-                captureHistory: true
+            general: {
+                log_enabled: true,
+                open_log_on_exit: false,
+                capture_console_history: true,
+                clear_screen_on_sections: true
             },
             cleaning: {
-                killProcesses: true,
-                cleanRegistry: true,
-                cleanTempFiles: true,
-                cleanBrowserData: false,
-                cleanDiscordCache: false
+                kill_processes: true,
+                clean_folders: true,
+                remove_cookies: true,
+                flush_dns: true,
+                restart_explorer: false,
+                clean_registry: true,
+                clean_prefetch: true
             },
             roblox: {
-                autoStart: false,
-                useCustomLauncher: false,
-                playerPath: '%LOCALAPPDATA%\\Roblox',
-                studioPath: '%LOCALAPPDATA%\\RobloxStudio'
+                download_roblox: true,
+                launch_roblox_on_exit: false,
+                create_appsettings: true
             },
             tools: {
-                processMonitor: false,
-                networkScanner: false,
-                fileAnalyzer: false,
-                externalTools: false
+                run_byebanasync: true
             },
             paths: {
-                tempDir: '%TEMP%',
-                logDir: './logs',
-                backupDir: './backups',
-                customPaths: ['%APPDATA%\\Roblox', '%LOCALAPPDATA%\\Roblox']
+                temp_folders: ["%temp%", "%temp%/*", "%localappdata%\\Temp"],
+                roblox_folders: ["%localappdata%\\Roblox", "%appdata%\\Roblox", "%appdata%\\Local\\Roblox"]
+            },
+            processes: {
+                roblox_processes: ["RobloxPlayerBeta.exe", "RobloxPlayerInstaller.exe"]
+            },
+            registry: {
+                registry_paths: ["HKCU\\Software\\Roblox", "HKLM\\SOFTWARE\\Roblox Corporation"]
             },
             advanced: {
-                threadCount: 'Auto',
-                timeout: 30,
-                sandbox: false,
-                verifySignatures: false
+                show_command_output: true,
+                force_file_deletion: true,
+                skip_confirmation_prompts: false,
+                auto_restart_after_cleaning: false
+            }
+        };
+
+        // Profile definitions
+        const profiles = {
+            default: {
+                general: {
+                    log_enabled: true,
+                    open_log_on_exit: false,
+                    capture_console_history: true,
+                    clear_screen_on_sections: true
+                },
+                cleaning: {
+                    kill_processes: true,
+                    clean_folders: true,
+                    remove_cookies: true,
+                    flush_dns: true,
+                    restart_explorer: false,
+                    clean_registry: true,
+                    clean_prefetch: true
+                },
+                roblox: {
+                    download_roblox: true,
+                    launch_roblox_on_exit: true,
+                    create_appsettings: true
+                },
+                tools: {
+                    run_byebanasync: true
+                },
+                advanced: {
+                    show_command_output: true,
+                    force_file_deletion: true,
+                    skip_confirmation_prompts: false,
+                    auto_restart_after_cleaning: true
+                }
             },
-            backup: {
-                autoBackup: true,
-                frequency: 'Daily',
-                maxBackups: 10
+            aggressive: {
+                general: {
+                    log_enabled: true,
+                    open_log_on_exit: true,
+                    capture_console_history: true,
+                    clear_screen_on_sections: false
+                },
+                cleaning: {
+                    kill_processes: true,
+                    clean_folders: true,
+                    remove_cookies: true,
+                    flush_dns: true,
+                    restart_explorer: true,
+                    clean_registry: true,
+                    clean_prefetch: true
+                },
+                roblox: {
+                    download_roblox: true,
+                    launch_roblox_on_exit: true,
+                    create_appsettings: true
+                },
+                tools: {
+                    run_byebanasync: true
+                },
+                advanced: {
+                    show_command_output: true,
+                    force_file_deletion: true,
+                    skip_confirmation_prompts: true,
+                    auto_restart_after_cleaning: true
+                }
             },
-            theme: {
-                preset: 'slate',
-                colors: {
-                    'bg-primary': '#0a0a0a',
-                    'bg-secondary': '#0f0f0f',
-                    'accent-primary': '#dc143c',
-                    'text-primary': '#e0e0e0'
+            minimal: {
+                general: {
+                    log_enabled: true,
+                    open_log_on_exit: false,
+                    capture_console_history: true,
+                    clear_screen_on_sections: true
+                },
+                cleaning: {
+                    kill_processes: true,
+                    clean_folders: false,
+                    remove_cookies: true,
+                    flush_dns: true,
+                    restart_explorer: false,
+                    clean_registry: false,
+                    clean_prefetch: false
+                },
+                roblox: {
+                    download_roblox: false,
+                    launch_roblox_on_exit: true,
+                    create_appsettings: false
+                },
+                tools: {
+                    run_byebanasync: true
+                },
+                advanced: {
+                    show_command_output: true,
+                    force_file_deletion: true,
+                    skip_confirmation_prompts: false,
+                    auto_restart_after_cleaning: false
                 }
             }
         };
 
-        // Section navigation
+        let currentProfile = 'default';
+        let hasUnsavedChanges = false;
+
+        // Theme management
+        const themes = {
+            slate: {
+                'bg-primary': '#0a0a0a',
+                'bg-secondary': '#0f0f0f',
+                'bg-tertiary': '#151515',
+                'bg-elevated': '#1a1a1a',
+                'text-primary': '#e0e0e0',
+                'text-secondary': '#999999',
+                'accent-primary': '#dc143c',
+                'border-primary': '#222222',
+                'success': '#26a69a',
+                'danger': '#dc143c'
+            },
+            obsidian: {
+                'bg-primary': '#0d1117',
+                'bg-secondary': '#161b22',
+                'bg-tertiary': '#1c2128',
+                'bg-elevated': '#21262d',
+                'text-primary': '#f0f6fc',
+                'text-secondary': '#8b949e',
+                'accent-primary': '#1f6feb',
+                'border-primary': '#30363d',
+                'success': '#3fb950',
+                'danger': '#f85149'
+            },
+            'github-dark': {
+                'bg-primary': '#0d1117',
+                'bg-secondary': '#161b22',
+                'bg-tertiary': '#21262d',
+                'bg-elevated': '#30363d',
+                'text-primary': '#f0f6fc',
+                'text-secondary': '#8b949e',
+                'accent-primary': '#58a6ff',
+                'border-primary': '#30363d',
+                'success': '#3fb950',
+                'danger': '#f85149'
+            },
+            'vscode-dark': {
+                'bg-primary': '#1e1e1e',
+                'bg-secondary': '#252526',
+                'bg-tertiary': '#2d2d30',
+                'bg-elevated': '#3e3e42',
+                'text-primary': '#cccccc',
+                'text-secondary': '#969696',
+                'accent-primary': '#007acc',
+                'border-primary': '#3e3e42',
+                'success': '#4ec9b0',
+                'danger': '#f44747'
+            },
+            nord: {
+                'bg-primary': '#2e3440',
+                'bg-secondary': '#3b4252',
+                'bg-tertiary': '#434c5e',
+                'bg-elevated': '#4c566a',
+                'text-primary': '#d8dee9',
+                'text-secondary': '#a5abb6',
+                'accent-primary': '#88c0d0',
+                'border-primary': '#4c566a',
+                'success': '#a3be8c',
+                'danger': '#bf616a'
+            },
+            dracula: {
+                'bg-primary': '#282a36',
+                'bg-secondary': '#44475a',
+                'bg-tertiary': '#44475a',
+                'bg-elevated': '#6272a4',
+                'text-primary': '#f8f8f2',
+                'text-secondary': '#e9e9f4',
+                'accent-primary': '#bd93f9',
+                'border-primary': '#6272a4',
+                'success': '#50fa7b',
+                'danger': '#ff5555'
+            },
+            light: {
+                'bg-primary': '#ffffff',
+                'bg-secondary': '#f6f8fa',
+                'bg-tertiary': '#e1e4e8',
+                'bg-elevated': '#ffffff',
+                'text-primary': '#24292e',
+                'text-secondary': '#586069',
+                'accent-primary': '#0366d6',
+                'border-primary': '#d1d5da',
+                'success': '#28a745',
+                'danger': '#d73a49'
+            }
+        };
+
+        function applyTheme(themeName) {
+            const theme = themes[themeName];
+            if (theme) {
+                Object.keys(theme).forEach(key => {
+                    document.documentElement.style.setProperty(`--${key}`, theme[key]);
+                    const colorInput = document.getElementById(key);
+                    const textInput = document.querySelector(`input[onchange*="${key}"]`);
+                    if (colorInput) {
+                        colorInput.value = theme[key];
+                    }
+                    if (textInput && textInput.type === 'text') {
+                        textInput.value = theme[key];
+                    }
+                });
+                updateStatus(`Applied ${themeName} theme`);
+                saveThemeToStorage(themeName);
+            }
+        }
+
+        function updateCustomTheme() {
+            const colorInputs = document.querySelectorAll('.color-grid input[type="color"]');
+            colorInputs.forEach(input => {
+                document.documentElement.style.setProperty(`--${input.id}`, input.value);
+                const textInput = input.nextElementSibling;
+                if (textInput && textInput.type === 'text') {
+                    textInput.value = input.value;
+                }
+            });
+            updateStatus('Custom theme updated');
+            saveCustomThemeToStorage();
+        }
+
+        function updateColorFromText(colorId, value) {
+            if (/^#[0-9A-F]{6}$/i.test(value)) {
+                document.documentElement.style.setProperty(`--${colorId}`, value);
+                const colorInput = document.getElementById(colorId);
+                if (colorInput) {
+                    colorInput.value = value;
+                }
+                updateStatus('Color updated');
+                saveCustomThemeToStorage();
+            } else {
+                updateStatus('Invalid color format. Use #RRGGBB');
+            }
+        }
+
+        
+        function saveThemeToStorage(themeName) {
+            localStorage.setItem('selected-theme', themeName);
+        }
+
+        function saveCustomThemeToStorage() {
+            const currentTheme = {};
+            Object.keys(themes.obsidian).forEach(key => {
+                const style = getComputedStyle(document.documentElement);
+                currentTheme[key] = style.getPropertyValue(`--${key}`).trim();
+            });
+            localStorage.setItem('custom-theme', JSON.stringify(currentTheme));
+        }
+
+        function loadThemeFromStorage() {
+            const savedTheme = localStorage.getItem('selected-theme');
+            const customTheme = localStorage.getItem('custom-theme');
+            
+            if (savedTheme && themes[savedTheme]) {
+                applyTheme(savedTheme);
+            } else if (customTheme) {
+                try {
+                    const theme = JSON.parse(customTheme);
+                    Object.keys(theme).forEach(key => {
+                        document.documentElement.style.setProperty(`--${key}`, theme[key]);
+                        const colorInput = document.getElementById(key);
+                        const textInput = document.querySelector(`input[onchange*="${key}"]`);
+                        if (colorInput) {
+                            colorInput.value = theme[key];
+                        }
+                        if (textInput && textInput.type === 'text') {
+                            textInput.value = theme[key];
+                        }
+                    });
+                } catch (error) {
+                    console.error('Failed to load custom theme:', error);
+                }
+            }
+        }
+
+        // Initialize the GUI
+        function initializeGUI() {
+            loadThemeFromStorage();
+            loadConfigFromStorage();
+            updateUIFromConfig();
+        }
+
+        // Navigation
         function showSection(sectionId) {
             // Hide all sections
             document.querySelectorAll('.section').forEach(section => {
@@ -1402,248 +1653,559 @@
             // Show selected section
             document.getElementById(sectionId).classList.add('active');
             
-            // Add active class to clicked nav item
-            event.target.closest('.nav-item').classList.add('active');
+            // Add active class to the button that contains the clicked element
+            const clickedButton = event.target.closest('.nav-item');
+            if (clickedButton) {
+                clickedButton.classList.add('active');
+            }
         }
 
         // Profile selection
         function selectProfile(profileName) {
-            // Remove selected class from all cards
+            // Remove selected class from all profile cards
             document.querySelectorAll('.profile-card').forEach(card => {
                 card.classList.remove('selected');
             });
             
             // Add selected class to clicked card
-            event.target.closest('.profile-card').classList.add('selected');
+            event.currentTarget.classList.add('selected');
             
-            config.profile = profileName;
-            applyProfile(profileName);
-        }
-
-        function applyProfile(profileName) {
-            switch(profileName) {
-                case 'default':
-                    // Apply default settings
-                    break;
-                case 'aggressive':
-                    // Enable all cleaning options
-                    break;
-                case 'minimal':
-                    // Enable only basic cleaning
-                    break;
-                case 'custom':
-                    // Load custom settings
-                    break;
+            if (profileName === 'custom') {
+                updateStatus('Custom profile selected - modify settings in other sections');
+                return;
+            }
+            
+            // Load profile configuration
+            if (profiles[profileName]) {
+                config = { ...config, ...profiles[profileName] };
+                currentProfile = profileName;
+                updateUIFromConfig();
+                updateStatus(`Loaded ${profileName} profile`);
+                hasUnsavedChanges = true;
             }
         }
 
         // Toggle switches
         function toggleSwitch(element) {
             element.classList.toggle('active');
-            const isActive = element.classList.contains('active');
-            
-            // Update config based on element ID
-            const id = element.id;
-            if (id.startsWith('logging-')) {
-                const setting = id.replace('logging-', '');
-                config.logging[setting] = isActive;
-            }
-        }
-
-        // Theme selection
-        function selectTheme(themeName) {
-            config.theme.preset = themeName;
-            // Apply theme colors
-            const themes = {
-                slate: {
-                    'bg-primary': '#0a0a0a',
-                    'bg-secondary': '#0f0f0f',
-                    'accent-primary': '#dc143c',
-                    'text-primary': '#e0e0e0'
-                },
-                obsidian: {
-                    'bg-primary': '#0d1117',
-                    'bg-secondary': '#161b22',
-                    'accent-primary': '#1f6feb',
-                    'text-primary': '#f0f6fc'
-                },
-                github: {
-                    'bg-primary': '#0d1117',
-                    'bg-secondary': '#21262d',
-                    'accent-primary': '#58a6ff',
-                    'text-primary': '#f0f6fc'
-                },
-                vscode: {
-                    'bg-primary': '#1e1e1e',
-                    'bg-secondary': '#252526',
-                    'accent-primary': '#007acc',
-                    'text-primary': '#cccccc'
-                },
-                nord: {
-                    'bg-primary': '#2e3440',
-                    'bg-secondary': '#3b4252',
-                    'accent-primary': '#88c0d0',
-                    'text-primary': '#d8dee9'
-                },
-                dracula: {
-                    'bg-primary': '#282a36',
-                    'bg-secondary': '#44475a',
-                    'accent-primary': '#bd93f9',
-                    'text-primary': '#f8f8f2'
-                },
-                light: {
-                    'bg-primary': '#ffffff',
-                    'bg-secondary': '#f6f8fa',
-                    'accent-primary': '#0366d6',
-                    'text-primary': '#24292e'
-                }
-            };
-            
-            const theme = themes[themeName];
-            if (theme) {
-                Object.keys(theme).forEach(key => {
-                    updateColor(key, theme[key]);
-                });
-            }
-        }
-
-        // Color updates
-        function updateColor(property, value) {
-            document.documentElement.style.setProperty(`--${property}`, value);
-            config.theme.colors[property] = value;
-            
-            // Update text input if exists
-            const textInput = document.querySelector(`input[onchange*="${property}"]`);
-            if (textInput) {
-                textInput.value = value;
-            }
-        }
-
-        function updateColorFromText(property, value) {
-            updateColor(property, value);
-            
-            // Update color picker if exists
-            const colorPicker = document.querySelector(`input[onchange*="${property}"][type="color"]`);
-            if (colorPicker) {
-                colorPicker.value = value;
-            }
+            hasUnsavedChanges = true;
+            updateStatus('Configuration updated');
         }
 
         // List management
-        function addListItem() {
-            const listEditor = event.target.closest('.list-editor');
-            const newItem = document.createElement('div');
-            newItem.className = 'list-item';
-            newItem.innerHTML = `
-                <input type="text" class="text-input" placeholder="Enter path..." style="flex: 1; margin-right: 8px;">
-                <button class="btn btn-sm btn-danger" onclick="removeListItem(this)">
-                    <i class="fas fa-trash"></i>
-                </button>
-            `;
-            listEditor.insertBefore(newItem, event.target);
+        function addListItem(listId, inputId) {
+            const input = document.getElementById(inputId);
+            const value = input.value.trim();
+            
+            if (value) {
+                const list = document.getElementById(listId);
+                const newItem = document.createElement('div');
+                newItem.className = 'list-item';
+                newItem.innerHTML = `
+                    <span>${value}</span>
+                    <button class="btn btn-danger btn-sm" onclick="removeListItem(this)">Remove</button>
+                `;
+                
+                // Insert before the add button
+                const addButton = list.querySelector('div[style*="margin-top"]');
+                list.insertBefore(newItem, addButton);
+                
+                input.value = '';
+                hasUnsavedChanges = true;
+                updateStatus('Item added to list');
+            }
         }
 
         function removeListItem(button) {
-            button.closest('.list-item').remove();
+            const item = button.parentElement;
+            item.remove();
+            hasUnsavedChanges = true;
+            updateStatus('Item removed from list');
         }
 
-        // Modal functions
-        function showModal(title, message, confirmAction) {
-            document.getElementById('modal-title').textContent = title;
-            document.getElementById('modal-message').textContent = message;
-            document.getElementById('modal').style.display = 'block';
-            
-            // Store confirm action
-            window.modalConfirmAction = confirmAction;
-        }
+        // Configuration management
+        function updateUIFromConfig() {
+            // Update toggle switches
+            const toggleMappings = [
+                ['general', 'log_enabled', 'general', 0],
+                ['general', 'open_log_on_exit', 'general', 1],
+                ['general', 'capture_console_history', 'general', 2],
+                ['general', 'clear_screen_on_sections', 'general', 3],
+                ['cleaning', 'kill_processes', 'cleaning', 0],
+                ['cleaning', 'clean_folders', 'cleaning', 1],
+                ['cleaning', 'remove_cookies', 'cleaning', 2],
+                ['cleaning', 'flush_dns', 'cleaning', 3],
+                ['cleaning', 'restart_explorer', 'cleaning', 4],
+                ['cleaning', 'clean_registry', 'cleaning', 5],
+                ['cleaning', 'clean_prefetch', 'cleaning', 6],
+                ['roblox', 'download_roblox', 'roblox', 0],
+                ['roblox', 'launch_roblox_on_exit', 'roblox', 1],
+                ['roblox', 'create_appsettings', 'roblox', 2],
+                ['tools', 'run_byebanasync', 'tools', 0],
+                ['advanced', 'show_command_output', 'advanced', 0],
+                ['advanced', 'force_file_deletion', 'advanced', 1],
+                ['advanced', 'skip_confirmation_prompts', 'advanced', 2],
+                ['advanced', 'auto_restart_after_cleaning', 'advanced', 3]
+            ];
 
-        function closeModal() {
-            document.getElementById('modal').style.display = 'none';
-        }
-
-        function confirmModalAction() {
-            if (window.modalConfirmAction) {
-                window.modalConfirmAction();
-            }
-            closeModal();
-        }
-
-        // Action functions
-        function saveLauncherFiles() {
-            showModal('Save and Run', 'Save configuration and launch Slate?', () => {
-                // Save configuration logic here
-                updateLastSaved();
-                console.log('Configuration saved and launching...');
+            toggleMappings.forEach(([section, key, targetSection, index]) => {
+                const sectionElement = document.getElementById(targetSection);
+                if (sectionElement) {
+                    const toggles = sectionElement.querySelectorAll('.toggle-switch');
+                    if (toggles[index]) {
+                        if (config[section][key]) {
+                            toggles[index].classList.add('active');
+                        } else {
+                            toggles[index].classList.remove('active');
+                        }
+                    }
+                }
             });
+
+            // Update list items
+            updateListFromConfig('temp-folders', config.paths.temp_folders);
+            updateListFromConfig('roblox-folders', config.paths.roblox_folders);
+        }
+
+        function updateListFromConfig(listId, items) {
+            const list = document.getElementById(listId);
+            const existingItems = list.querySelectorAll('.list-item');
+            
+            // Remove existing items (except the add button section)
+            existingItems.forEach(item => {
+                if (!item.querySelector('input')) {
+                    item.remove();
+                }
+            });
+            
+            // Add new items
+            const addButton = list.querySelector('div[style*="margin-top"]');
+            items.forEach(item => {
+                const newItem = document.createElement('div');
+                newItem.className = 'list-item';
+                newItem.innerHTML = `
+                    <span>${item}</span>
+                    <button class="btn btn-danger btn-sm" onclick="removeListItem(this)">Remove</button>
+                `;
+                list.insertBefore(newItem, addButton);
+            });
+        }
+
+        function updateConfigFromUI() {
+            // Update toggle switches
+            const toggleMappings = [
+                ['general', 'log_enabled', 'general', 0],
+                ['general', 'open_log_on_exit', 'general', 1],
+                ['general', 'capture_console_history', 'general', 2],
+                ['general', 'clear_screen_on_sections', 'general', 3],
+                ['cleaning', 'kill_processes', 'cleaning', 0],
+                ['cleaning', 'clean_folders', 'cleaning', 1],
+                ['cleaning', 'remove_cookies', 'cleaning', 2],
+                ['cleaning', 'flush_dns', 'cleaning', 3],
+                ['cleaning', 'restart_explorer', 'cleaning', 4],
+                ['cleaning', 'clean_registry', 'cleaning', 5],
+                ['cleaning', 'clean_prefetch', 'cleaning', 6],
+                ['roblox', 'download_roblox', 'roblox', 0],
+                ['roblox', 'launch_roblox_on_exit', 'roblox', 1],
+                ['roblox', 'create_appsettings', 'roblox', 2],
+                ['tools', 'run_byebanasync', 'tools', 0],
+                ['advanced', 'show_command_output', 'advanced', 0],
+                ['advanced', 'force_file_deletion', 'advanced', 1],
+                ['advanced', 'skip_confirmation_prompts', 'advanced', 2],
+                ['advanced', 'auto_restart_after_cleaning', 'advanced', 3]
+            ];
+
+            toggleMappings.forEach(([section, key, targetSection, index]) => {
+                const sectionElement = document.getElementById(targetSection);
+                if (sectionElement) {
+                    const toggles = sectionElement.querySelectorAll('.toggle-switch');
+                    if (toggles[index]) {
+                        config[section][key] = toggles[index].classList.contains('active');
+                    }
+                }
+            });
+
+            // Update list items
+            config.paths.temp_folders = getListItems('temp-folders');
+            config.paths.roblox_folders = getListItems('roblox-folders');
+        }
+
+        function getListItems(listId) {
+            const list = document.getElementById(listId);
+            const items = [];
+            list.querySelectorAll('.list-item').forEach(item => {
+                const text = item.querySelector('span');
+                if (text) {
+                    items.push(text.textContent);
+                }
+            });
+            return items;
+        }
+
+        // Storage functions
+        function loadConfigFromStorage() {
+            const savedConfig = localStorage.getItem('roblox_cleaner_config');
+            if (savedConfig) {
+                try {
+                    config = JSON.parse(savedConfig);
+                } catch (e) {
+                    console.error('Failed to load saved configuration:', e);
+                }
+            }
+        }
+
+        function saveConfigToStorage() {
+            localStorage.setItem('roblox_cleaner_config', JSON.stringify(config));
+            const now = new Date();
+            document.getElementById('last-saved').textContent = `Last saved: ${now.toLocaleString()}`;
+        }
+
+        function getListItems(listId) {
+            const list = document.getElementById(listId);
+            const items = [];
+            list.querySelectorAll('.list-item').forEach(item => {
+                const text = item.querySelector('span');
+                if (text) {
+                    items.push(text.textContent);
+                }
+            });
+            return items;
+        }
+
+        function getConfigFromUI() {
+            return {
+                general: {
+                    log_enabled: document.querySelector('#logging-enabled')?.classList.contains('active') || false,
+                    open_log_on_exit: document.querySelector('#open-log-on-exit')?.classList.contains('active') || false,
+                    capture_console_history: document.querySelector('#capture-console-history')?.classList.contains('active') || false,
+                    clear_screen_on_sections: document.querySelector('#clear-screen-on-sections')?.classList.contains('active') || false
+                },
+                cleaning: {
+                    kill_processes: document.querySelector('#kill-processes')?.classList.contains('active') || false,
+                    clean_folders: document.querySelector('#clean-folders')?.classList.contains('active') || false,
+                    remove_cookies: document.querySelector('#remove-cookies')?.classList.contains('active') || false,
+                    flush_dns: document.querySelector('#flush-dns')?.classList.contains('active') || false,
+                    clean_registry: document.querySelector('#clean-registry')?.classList.contains('active') || false,
+                    clean_prefetch: document.querySelector('#clean-prefetch')?.classList.contains('active') || false,
+                    restart_explorer: document.querySelector('#restart-explorer')?.classList.contains('active') || false
+                },
+                roblox: {
+                    download_roblox: document.querySelector('#download-roblox')?.classList.contains('active') || false,
+                    launch_roblox_on_exit: document.querySelector('#launch-roblox-on-exit')?.classList.contains('active') || false,
+                    create_appsettings: document.querySelector('#create-appsettings')?.classList.contains('active') || false
+                },
+                tools: {
+                    run_byebanasync: document.querySelector('#run-bye-ban-async')?.classList.contains('active') || false
+                },
+                paths: {
+                    temp_folders: getListItems('temp-folders'),
+                    roblox_folders: getListItems('roblox-folders')
+                },
+                processes: {
+                    roblox_processes: ['RobloxPlayerBeta.exe', 'RobloxPlayerLauncher.exe']
+                },
+                registry: {
+                    roblox_keys: ['HKEY_LOCAL_MACHINE\\SOFTWARE\\Roblox', 'HKEY_CURRENT_USER\\SOFTWARE\\Roblox']
+                },
+                advanced: {
+                    show_command_output: document.querySelector('#show-command-output')?.classList.contains('active') || false,
+                    force_file_deletion: document.querySelector('#force-file-deletion')?.classList.contains('active') || false,
+                    skip_confirmation_prompts: document.querySelector('#skip-confirmation-prompts')?.classList.contains('active') || false,
+                    auto_restart_after_cleaning: document.querySelector('#auto-restart-after-cleaning')?.classList.contains('active') || false
+                }
+            };
+        }
+
+        // Save configuration and generate launcher files
+        function saveLauncherFiles() {
+            const config = getConfigFromUI();
+            
+            try {
+                // Create and download config file
+                const configBlob = new Blob([JSON.stringify(config, null, 4)], { type: 'application/json' });
+                const configUrl = URL.createObjectURL(configBlob);
+                const configLink = document.createElement('a');
+                configLink.href = configUrl;
+                configLink.download = 'slate.config.json';
+                document.body.appendChild(configLink);
+                configLink.click();
+                document.body.removeChild(configLink);
+                URL.revokeObjectURL(configUrl);
+                
+                updateStatus('Configuration file downloaded!');
+                updateStatus('Next steps:');
+                updateStatus('1. Download slate.exe from GitHub releases');
+                updateStatus('2. Place slate.config.json in same folder');
+                updateStatus('3. Run slate.exe');
+                
+                // Show simple instructions popup
+                showSimpleInstructionsPopup();
+                
+                hasUnsavedChanges = false;
+                updateLastSaved();
+                
+            } catch (error) {
+                console.error('Error generating config file:', error);
+                updateStatus('Error generating config file: ' + error.message, 'error');
+            }
+        }
+
+
+        
+        // Show simple instructions popup
+        function showSimpleInstructionsPopup() {
+            const popup = document.createElement('div');
+            popup.style.cssText = `
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: var(--bg-elevated);
+                border: 1px solid var(--border-primary);
+                border-radius: 12px;
+                padding: 24px;
+                box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+                z-index: 10000;
+                max-width: 500px;
+                width: 90%;
+            `;
+            
+            popup.innerHTML = `
+                <div style="display: flex; align-items: center; margin-bottom: 16px;">
+                    <i class="fas fa-check-circle" style="color: #10b981; font-size: 24px; margin-right: 12px;"></i>
+                    <h3 style="color: var(--text-primary); margin: 0; font-size: 18px;">Configuration File Downloaded!</h3>
+                </div>
+                
+                <div style="color: var(--text-secondary); margin-bottom: 20px; line-height: 1.5;">
+                    <p style="margin: 0 0 12px 0;"><strong>Simple Setup:</strong></p>
+                    <ol style="margin: 0; padding-left: 20px;">
+                        <li style="margin-bottom: 8px;">Download <strong>slate.exe</strong> from <a href="https://github.com/midinterlude/slate/releases" target="_blank" style="color: #3b82f6;">GitHub Releases</a></li>
+                        <li style="margin-bottom: 8px;">Place <code style="background: var(--bg-overlay); padding: 2px 6px; border-radius: 4px; color: #3b82f6;">slate.config.json</code> in the same folder</li>
+                        <li style="margin-bottom: 8px;"><strong>Double-click slate.exe</strong> to run</li>
+                    </ol>
+                </div>
+                
+                <div style="background: var(--bg-overlay); border-radius: 8px; padding: 12px; margin-bottom: 20px;">
+                    <p style="margin: 0; color: var(--text-secondary); font-size: 14px;">
+                        <i class="fas fa-info-circle" style="color: #3b82f6; margin-right: 8px;"></i>
+                        <strong>That's it!</strong> No Python installation needed - just run the exe!
+                    </p>
+                </div>
+                
+                <div style="display: flex; gap: 12px; justify-content: flex-end;">
+                    <button onclick="this.closest('div').remove()" style="
+                        background: var(--bg-overlay);
+                        color: var(--text-primary);
+                        border: 1px solid var(--border-primary);
+                        padding: 8px 16px;
+                        border-radius: 6px;
+                        cursor: pointer;
+                        font-size: 14px;
+                    ">Got it!</button>
+                </div>
+            `;
+            
+            // Add backdrop
+            const backdrop = document.createElement('div');
+            backdrop.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(0, 0, 0, 0.5);
+                z-index: 9999;
+            `;
+            backdrop.onclick = () => {
+                document.body.removeChild(backdrop);
+                document.body.removeChild(popup);
+            };
+            
+            document.body.appendChild(backdrop);
+            document.body.appendChild(popup);
         }
 
         function saveOnly() {
-            // Save configuration logic here
-            updateLastSaved();
-            console.log('Configuration saved');
+            const config = getConfigFromUI();
+            
+            try {
+                // Create and download config file as JSON
+                const configBlob = new Blob([JSON.stringify(config, null, 4)], { type: 'application/json' });
+                const configUrl = URL.createObjectURL(configBlob);
+                const configLink = document.createElement('a');
+                configLink.href = configUrl;
+                configLink.download = 'slate.config.json';
+                document.body.appendChild(configLink);
+                configLink.click();
+                document.body.removeChild(configLink);
+                URL.revokeObjectURL(configUrl);
+                
+                updateStatus('Configuration file saved as JSON');
+                hasUnsavedChanges = false;
+                updateLastSaved();
+                
+            } catch (error) {
+                console.error('Error generating config file:', error);
+                updateStatus('Error generating config file: ' + error.message, 'error');
+            }
         }
 
-        function cancel() {
-            showModal('Cancel', 'Discard unsaved changes?', () => {
-                console.log('Changes discarded');
-            });
+        function exportConfig() {
+            updateConfigFromUI();
+            const configBlob = new Blob([JSON.stringify(config, null, 4)], { type: 'application/json' });
+            const configUrl = URL.createObjectURL(configBlob);
+            
+            const link = document.createElement('a');
+            link.href = configUrl;
+            link.download = `roblox_cleaner_config_${new Date().toISOString().slice(0, 10)}.json`;
+            link.click();
+            
+            URL.revokeObjectURL(configUrl);
+            updateStatus('Configuration exported');
         }
 
-        function createBackup() {
-            const backupData = JSON.stringify(config, null, 2);
-            const blob = new Blob([backupData], { type: 'application/json' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = `slate-config-backup-${new Date().toISOString().split('T')[0]}.json`;
-            a.click();
-            URL.revokeObjectURL(url);
-        }
-
-        function restoreBackup() {
-            showModal('Restore Backup', 'This will overwrite current settings. Continue?', () => {
-                console.log('Backup restored');
-            });
-        }
-
-        function loadBackup(event) {
+        function importConfig(event) {
             const file = event.target.files[0];
             if (file) {
                 const reader = new FileReader();
                 reader.onload = function(e) {
                     try {
-                        const backupConfig = JSON.parse(e.target.result);
-                        config = { ...config, ...backupConfig };
-                        console.log('Backup loaded successfully');
+                        config = JSON.parse(e.target.result);
+                        updateUIFromConfig();
+                        saveConfigToStorage();
+                        updateStatus('Configuration imported successfully');
+                        hasUnsavedChanges = false;
                     } catch (error) {
-                        console.error('Invalid backup file:', error);
+                        updateStatus('Failed to import configuration: Invalid JSON');
                     }
                 };
                 reader.readAsText(file);
             }
         }
 
-        function openLogLocation() {
-            console.log('Opening log location...');
+        function backupConfig() {
+            const backup = {
+                timestamp: new Date().toISOString(),
+                config: config,
+                profile: currentProfile
+            };
+            
+            const backups = JSON.parse(localStorage.getItem('roblox_cleaner_backups') || '[]');
+            backups.push(backup);
+            
+            // Keep only last 10 backups
+            if (backups.length > 10) {
+                backups.shift();
+            }
+            
+            localStorage.setItem('roblox_cleaner_backups', JSON.stringify(backups));
+            updateStatus('Configuration backup created');
         }
 
-        function updateLastSaved() {
-            const now = new Date();
-            document.getElementById('last-saved').textContent = `Last saved: ${now.toLocaleString()}`;
+        function restoreConfig() {
+            const backups = JSON.parse(localStorage.getItem('roblox_cleaner_backups') || '[]');
+            if (backups.length === 0) {
+                updateStatus('No backups available');
+                return;
+            }
+            
+            // Restore the most recent backup
+            const latestBackup = backups[backups.length - 1];
+            config = latestBackup.config;
+            currentProfile = latestBackup.profile || 'custom';
+            updateUIFromConfig();
+            saveConfigToStorage();
+            updateStatus('Configuration restored from backup');
+            hasUnsavedChanges = false;
         }
+
+        function resetToDefaults() {
+            showModal('Reset to Defaults', 'Are you sure you want to reset all settings to default values?', () => {
+                config = { ...config, ...profiles.default };
+                currentProfile = 'default';
+                updateUIFromConfig();
+                saveConfigToStorage();
+                updateStatus('Configuration reset to defaults');
+                hasUnsavedChanges = false;
+            });
+        }
+
+        function clearAllSettings() {
+            showModal('Clear All Settings', 'Are you sure you want to clear all settings? This action cannot be undone.', () => {
+                localStorage.removeItem('roblox_cleaner_config');
+                localStorage.removeItem('roblox_cleaner_backups');
+                initializeGUI();
+                updateStatus('All settings cleared');
+                hasUnsavedChanges = false;
+            });
+        }
+
+        // Modal functions
+        function showModal(title, message, onConfirm) {
+            document.getElementById('modal-title').textContent = title;
+            document.getElementById('modal-message').innerHTML = message;
+            document.getElementById('confirmModal').style.display = 'block';
+            
+            const confirmBtn = document.getElementById('modal-confirm');
+            confirmBtn.onclick = () => {
+                onConfirm();
+                closeModal();
+            };
+        }
+
+        function closeModal() {
+            document.getElementById('confirmModal').style.display = 'none';
+        }
+
+        // Status updates
+        function updateStatus(message) {
+            document.getElementById('status-text').textContent = message;
+        }
+
+        // Log location function
+        function openLogLocation() {
+            const logPath = '%temp%\\slate\\slate.log';
+            
+            showModal('Log Location', 
+                'Log files are stored at:<br><br>' +
+                '<code style="background: var(--bg-secondary); padding: 8px; border-radius: 4px; font-family: monospace; display: inline-block;">' + logPath + '</code><br><br>' +
+                'You can open this location in File Explorer or copy the path above.', 
+                () => {
+                    // Try to open the log location in explorer
+                    try {
+                        // This will only work in Windows/Edge
+                        if (window.shell) {
+                            window.shell.executeCommand('explorer', '/select,' + logPath);
+                            updateStatus('Opening log location...');
+                        } else {
+                            // Fallback: copy to clipboard
+                            navigator.clipboard.writeText(logPath);
+                            updateStatus('Log path copied to clipboard!');
+                        }
+                    } catch (error) {
+                        updateStatus('Could not open log location: ' + error.message);
+                    }
+                }
+            );
+        }
+
+        // Initialize on load
+        window.addEventListener('load', initializeGUI);
+
+        // Warn before closing with unsaved changes
+        window.addEventListener('beforeunload', (e) => {
+            if (hasUnsavedChanges) {
+                e.preventDefault();
+                e.returnValue = '';
+            }
+        });
 
         // Close modal when clicking outside
-        window.onclick = function(event) {
-            const modal = document.getElementById('modal');
-            if (event.target === modal) {
+        window.addEventListener('click', (e) => {
+            const modal = document.getElementById('confirmModal');
+            if (e.target === modal) {
                 closeModal();
             }
-        }
-
-        // Initialize
-        document.addEventListener('DOMContentLoaded', function() {
-            // Apply initial theme
-            selectTheme('slate');
         });
     </script>
 </body>
