@@ -1048,6 +1048,13 @@
                             </div>
                             <div class="toggle-switch active" onclick="toggleSwitch(this)"></div>
                         </div>
+                        <div class="config-item">
+                            <div>
+                                <div class="config-label">Use Past Versions</div>
+                                <div class="config-description">Use previous Roblox client versions instead of latest</div>
+                            </div>
+                            <div id="use-past-versions" class="toggle-switch" onclick="toggleSwitch(this)"></div>
+                        </div>
                     </div>
                 </div>
 
@@ -1336,7 +1343,8 @@
             roblox: {
                 download_roblox: true,
                 launch_roblox_on_exit: false,
-                create_appsettings: true
+                create_appsettings: true,
+                use_past_versions: false
             },
             tools: {
                 run_byebanasync: true
@@ -1380,7 +1388,8 @@
                 roblox: {
                     download_roblox: true,
                     launch_roblox_on_exit: true,
-                    create_appsettings: true
+                    create_appsettings: true,
+                    use_past_versions: false
                 },
                 tools: {
                     run_byebanasync: true
@@ -1411,7 +1420,8 @@
                 roblox: {
                     download_roblox: true,
                     launch_roblox_on_exit: true,
-                    create_appsettings: true
+                    create_appsettings: true,
+                    use_past_versions: false
                 },
                 tools: {
                     run_byebanasync: true
@@ -1442,7 +1452,8 @@
                 roblox: {
                     download_roblox: false,
                     launch_roblox_on_exit: true,
-                    create_appsettings: false
+                    create_appsettings: false,
+                    use_past_versions: false
                 },
                 tools: {
                     run_byebanasync: true
@@ -1473,7 +1484,8 @@
                 roblox: {
                     download_roblox: false,
                     launch_roblox_on_exit: false,
-                    create_appsettings: false
+                    create_appsettings: false,
+                    use_past_versions: false
                 },
                 tools: {
                     run_byebanasync: true
@@ -1774,6 +1786,7 @@
                 ['roblox', 'download_roblox', 'roblox', 0],
                 ['roblox', 'launch_roblox_on_exit', 'roblox', 1],
                 ['roblox', 'create_appsettings', 'roblox', 2],
+                ['roblox', 'use_past_versions', 'roblox', 3],
                 ['tools', 'run_byebanasync', 'tools', 0],
                 ['advanced', 'show_command_output', 'advanced', 0],
                 ['advanced', 'force_file_deletion', 'advanced', 1],
@@ -1841,6 +1854,7 @@
                 ['roblox', 'download_roblox', 'roblox', 0],
                 ['roblox', 'launch_roblox_on_exit', 'roblox', 1],
                 ['roblox', 'create_appsettings', 'roblox', 2],
+                ['roblox', 'use_past_versions', 'roblox', 3],
                 ['tools', 'run_byebanasync', 'tools', 0],
                 ['advanced', 'show_command_output', 'advanced', 0],
                 ['advanced', 'force_file_deletion', 'advanced', 1],
@@ -1925,7 +1939,8 @@
                 roblox: {
                     download_roblox: document.querySelector('#download-roblox')?.classList.contains('active') || false,
                     launch_roblox_on_exit: document.querySelector('#launch-roblox-on-exit')?.classList.contains('active') || false,
-                    create_appsettings: document.querySelector('#create-appsettings')?.classList.contains('active') || false
+                    create_appsettings: document.querySelector('#create-appsettings')?.classList.contains('active') || false,
+                    use_past_versions: document.querySelector('#use-past-versions')?.classList.contains('active') || false
                 },
                 tools: {
                     run_byebanasync: document.querySelector('#run-bye-ban-async')?.classList.contains('active') || false
