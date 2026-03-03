@@ -860,15 +860,10 @@
                 
                 <!-- Sidebar Action Buttons -->
                 <div class="sidebar-actions">
-                    <button class="sidebar-btn btn-success" onclick="saveLauncherFiles()">
-                        <i class="fas fa-play"></i>
-                        <div class="divider"></div>
-                        <span>Save and Run</span>
-                    </button>
                     <button class="sidebar-btn btn-primary" onclick="saveOnly()">
                         <i class="fas fa-save"></i>
                         <div class="divider"></div>
-                        <span>Save Only</span>
+                        <span>Save</span>
                     </button>
                     <button class="sidebar-btn btn-secondary" onclick="cancel()">
                         <i class="fas fa-times"></i>
@@ -906,6 +901,14 @@
                                 <h3>Minimal</h3>
                             </div>
                             <p>Basic cleaning only. Safe option with minimal system impact.</p>
+                        </div>
+                        <div class="profile-card" onclick="selectProfile('balanced')">
+                            <div class="profile-card-header">
+                                <i class="fas fa-balance-scale"></i>
+                                <div class="divider"></div>
+                                <h3>Balanced</h3>
+                            </div>
+                            <p>Balanced configuration with essential cleaning features. Safe and effective for most users.</p>
                         </div>
                         <div class="profile-card" onclick="selectProfile('custom')">
                             <div class="profile-card-header">
@@ -1285,8 +1288,7 @@
                 </div>
 
                 <div class="action-buttons">
-                    <button class="btn btn-success" onclick="saveLauncherFiles()"><i class="fas fa-play"></i> Save and Run</button>
-                    <button class="btn btn-primary" onclick="saveOnly()"><i class="fas fa-save"></i> Save Only</button>
+                    <button class="btn btn-primary" onclick="saveOnly()"><i class="fas fa-save"></i> Save</button>
                     <button class="btn btn-secondary" onclick="cancel()"><i class="fas fa-times"></i> Cancel</button>
                 </div>
             </div>
@@ -1448,6 +1450,37 @@
                 advanced: {
                     show_command_output: true,
                     force_file_deletion: true,
+                    skip_confirmation_prompts: false,
+                    auto_restart_after_cleaning: false
+                }
+            },
+            balanced: {
+                general: {
+                    log_enabled: true,
+                    open_log_on_exit: false,
+                    capture_console_history: true,
+                    clear_screen_on_sections: false
+                },
+                cleaning: {
+                    kill_processes: true,
+                    clean_folders: false,
+                    remove_cookies: true,
+                    flush_dns: true,
+                    restart_explorer: false,
+                    clean_registry: false,
+                    clean_prefetch: false
+                },
+                roblox: {
+                    download_roblox: false,
+                    launch_roblox_on_exit: false,
+                    create_appsettings: false
+                },
+                tools: {
+                    run_byebanasync: true
+                },
+                advanced: {
+                    show_command_output: false,
+                    force_file_deletion: false,
                     skip_confirmation_prompts: false,
                     auto_restart_after_cleaning: false
                 }
@@ -2160,6 +2193,34 @@
         // Status updates
         function updateStatus(message) {
             document.getElementById('status-text').textContent = message;
+        }
+
+        // Cancel function - closes the page
+        function cancel() {
+            console.log('Cancel function called');
+            if (hasUnsavedChanges) {
+                showModal('Unsaved Changes', 'You have unsaved changes. Are you sure you want to close without saving?', () => {
+                    console.log('Attempting to close window');
+                    try {
+                        window.close();
+                        // Fallback: redirect to midinterlude.github.io
+                        window.location.href = 'https://midinterlude.github.io';
+                    } catch (e) {
+                        console.log('Window close failed, redirecting to midinterlude.github.io');
+                        window.location.href = 'https://midinterlude.github.io';
+                    }
+                });
+            } else {
+                console.log('No unsaved changes, closing window');
+                try {
+                    window.close();
+                    // Fallback: redirect to midinterlude.github.io
+                    window.location.href = 'https://midinterlude.github.io';
+                } catch (e) {
+                    console.log('Window close failed, redirecting to midinterlude.github.io');
+                    window.location.href = 'https://midinterlude.github.io';
+                }
+            }
         }
 
         // Log location function
