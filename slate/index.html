@@ -15,32 +15,45 @@
         }
 
         :root {
-            --bg-primary: #0a0a0a;
-            --bg-secondary: #0f0f0f;
-            --bg-tertiary: #151515;
-            --bg-elevated: #1a1a1a;
-            --bg-overlay: #222222;
-            --border-primary: #222222;
-            --border-secondary: #1a1a1a;
-            --text-primary: #e0e0e0;
-            --text-secondary: #999999;
-            --text-muted: #666666;
-            --text-link: #dc143c;
-            --accent-primary: #dc143c;
-            --accent-hover: #ff1744;
-            --success: #26a69a;
-            --danger: #dc143c;
-            --warning: #ff9800;
-            --code-bg: #0a0a0a;
-            --shadow: 0 8px 24px rgba(0, 0, 0, 0.8);
+            --bg-primary: #0f172a;        
+            --bg-secondary: #1e293b;      
+            --bg-tertiary: #334155;       
+            --bg-elevated: #1e293b;       
+            --bg-overlay: #0f172a;
+
+            --border-primary: #334155;    
+            --border-secondary: #1e293b;
+
+            --text-primary: #f8fafc;      
+            --text-secondary: #94a3b8;    
+            --text-muted: #64748b;        
+            --text-link: #818cf8;         
+
+            --accent-primary: #6366f1;    
+            --accent-hover: #4f46e5;
+
+            --success: #10b981;           
+            --danger: #f43f5e;             
+            --warning: #f59e0b;           
+
+            --code-bg: #1e293b;
+
+            --shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+            --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.1);
+            --radius-sm: 6px;
+            --radius-md: 8px;
+            --radius-lg: 12px;
+            --radius-xl: 16px;
         }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            background: var(--bg-primary);
+            font-family: 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+            background: var(--bg-secondary);
             color: var(--text-primary);
             min-height: 100vh;
-            line-height: 1.6;
+            line-height: 1.5;
+            font-size: 14px;
         }
 
         .container {
@@ -53,28 +66,64 @@
             overflow: hidden;
             display: flex;
             flex-direction: column;
+            margin: 0;
         }
 
         .header {
-            background: var(--bg-tertiary);
+            background: var(--bg-elevated);
             color: var(--text-primary);
-            padding: 32px 40px;
-            text-align: center;
+            padding: 20px 24px;
+            text-align: left;
             border-bottom: 1px solid var(--border-primary);
+            border-radius: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
         }
 
         .header h1 {
-            font-size: 2.5rem;
-            font-weight: 500;
-            margin-bottom: 8px;
-            letter-spacing: normal;
+            font-size: 4px;
+            font-weight: 600;
+            margin: 0;
+            letter-spacing: -0.025em;
+            color: var(--text-primary);
+            white-space: pre;
+            line-height: 1;
+            font-family: 'Courier New', monospace;
+            letter-spacing: -0.1em;
         }
 
-        .header p {
-            font-size: 1.1rem;
-            color: var(--text-secondary);
-            font-weight: 400;
+        .header-actions {
+            display: flex;
+            gap: 8px;
+            align-items: center;
         }
+
+        .header-btn {
+            padding: 6px 12px;
+            background: var(--bg-elevated);
+            color: var(--text-primary);
+            border: 1px solid var(--border-primary);
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 500;
+            transition: all 0.15s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: none;
+        }
+
+        .header-btn:hover {
+            background: var(--bg-overlay);
+            border-color: var(--border-primary);
+            transform: none;
+            box-shadow: none;
+        }
+
 
         .main-content {
             display: flex;
@@ -83,17 +132,19 @@
         }
 
         .sidebar {
-            width: 280px;
-            background: var(--bg-tertiary);
+            background: var(--bg-primary);
             border-right: 1px solid var(--border-primary);
-            padding: 24px 16px;
-            overflow-y: auto;
+            padding: 16px;
+            min-width: 280px;
+            max-width: 280px;
             display: flex;
             flex-direction: column;
+            gap: 8px;
+            height: calc(100vh - 80px);
+            overflow-y: auto;
         }
 
         .sidebar-actions {
-            margin-top: auto;
             padding-top: 20px;
             border-top: 1px solid var(--border-primary);
             display: flex;
@@ -105,114 +156,156 @@
             display: flex;
             align-items: center;
             width: 100%;
-            padding: 12px 16px;
-            margin-bottom: 4px;
-            background: var(--bg-elevated);
-            border: 1px solid var(--border-primary);
+            padding: 10px 12px;
+            margin-bottom: 2px;
+            background: transparent;
+            border: 1px solid transparent;
             border-radius: 8px;
             cursor: pointer;
-            transition: all 0.15s ease;
+            transition: all 0.2s cubic-bezier(0.25, 1.1, 0.4, 1);
             font-size: 14px;
             font-weight: 500;
             color: var(--text-secondary);
             text-decoration: none;
-            gap: 12px;
-        }
-
-        .sidebar-btn:hover {
-            background: var(--bg-overlay);
-            color: var(--text-primary);
-            border-color: var(--border-primary);
-            transform: translateY(-1px);
-        }
-
-        .sidebar-btn.btn-success {
-            background: var(--success);
-            color: white;
-            border-color: var(--success);
-        }
-
-        .sidebar-btn.btn-primary {
-            background: var(--accent-primary);
-            color: white;
-            border-color: var(--accent-primary);
-        }
-
-        .sidebar-btn.btn-secondary {
-            background: var(--bg-overlay);
-            color: var(--text-primary);
-            border-color: var(--border-primary);
+            position: relative;
         }
 
         .sidebar-btn i {
-            width: 16px;
+            width: 18px;
             text-align: center;
             flex-shrink: 0;
+            margin-right: 12px;
+            color: var(--text-secondary);
+            transition: color 0.2s ease;
         }
 
-        .sidebar-btn .divider {
-            width: 1px;
-            height: 16px;
-            background: rgba(255, 255, 255, 0.3);
-            flex-shrink: 0;
+        .sidebar-btn:hover {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            transform: translateX(2px);
         }
 
-        .sidebar-btn span {
-            flex: 1;
-            text-align: left;
+        .sidebar-btn:hover i {
+            color: var(--text-primary);
+        }
+
+        .sidebar-btn.btn-primary {
+            background: var(--accent-primary) !important;
+            color: white !important;
+            border-color: var(--accent-primary) !important;
+        }
+
+        .sidebar-btn.btn-primary i {
+            color: white !important;
+        }
+
+        .sidebar-btn.btn-primary:hover {
+            transform: translateX(2px);
+            opacity: 0.9;
+        }
+
+        .sidebar-btn.btn-secondary {
+            background: var(--text-muted) !important;
+            color: white !important;
+            border-color: var(--text-muted) !important;
+        }
+
+        .sidebar-btn.btn-secondary i {
+            color: white !important;
+        }
+
+        .sidebar-btn.btn-secondary:hover {
+            background: var(--text-secondary) !important;
+            border-color: var(--text-secondary) !important;
+            transform: translateX(2px);
+        }
+
+        .nav-section {
+            margin-bottom: 20px;
+        }
+
+        .nav-section-title {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+            padding: 0 12px;
         }
 
         .nav-item {
             display: flex;
             align-items: center;
             width: 100%;
-            padding: 12px 16px;
-            margin-bottom: 4px;
+            padding: 10px 12px;
+            margin-bottom: 2px;
             background: transparent;
             border: 1px solid transparent;
             border-radius: 8px;
             cursor: pointer;
-            transition: all 0.15s ease;
+            transition: all 0.2s cubic-bezier(0.25, 1.1, 0.4, 1);
             font-size: 14px;
             font-weight: 500;
             color: var(--text-secondary);
             text-decoration: none;
+            position: relative;
         }
 
         .nav-item i {
-            width: 16px;
+            width: 18px;
             text-align: center;
             flex-shrink: 0;
             margin-right: 12px;
+            color: var(--text-secondary);
+            transition: color 0.2s ease;
         }
 
         .nav-item .divider {
             width: 1px;
             height: 16px;
             background: var(--border-primary);
-            flex-shrink: 0;
-            margin-right: 12px;
+            margin: 0 8px;
         }
 
-        .nav-item span {
-            text-align: left;
-            flex: 1;
+        .nav-item:hover i,
+        .nav-item.active i {
+            color: var(--text-primary);
         }
 
         .nav-item:hover {
-            background: var(--bg-elevated);
+            background: var(--bg-tertiary);
             color: var(--text-primary);
-            border-color: var(--border-primary);
+            transform: translateX(2px);
         }
 
         .nav-item.active {
-            background: var(--accent-primary) !important;
-            color: white !important;
-            border-color: var(--accent-primary) !important;
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            font-weight: 500;
+            position: relative;
+            overflow: hidden;
         }
 
-        .nav-item.active i {
-            color: white !important;
+        .nav-item.active::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 3px;
+            height: 100%;
+            background: var(--accent-primary);
+            border-radius: 0 2px 2px 0;
+            animation: slideIn 0.3s cubic-bezier(0.25, 1.1, 0.4, 1);
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(-100%);
+            }
+            to {
+                transform: translateX(0);
+            }
         }
 
         .nav-item.active .divider {
@@ -221,9 +314,10 @@
 
         .content {
             flex: 1;
-            padding: 32px 40px;
+            padding: 24px;
             overflow-y: auto;
-            max-height: calc(100vh - 200px);
+            max-height: calc(100vh - 60px);
+            background: var(--bg-secondary);
         }
 
         .section {
@@ -242,12 +336,12 @@
 
         .section h2 {
             color: var(--text-primary);
-            margin-bottom: 24px;
-            font-size: 1.75rem;
+            margin-bottom: 16px;
+            font-size: 20px;
             font-weight: 600;
             letter-spacing: -0.025em;
             border-bottom: 1px solid var(--border-primary);
-            padding-bottom: 16px;
+            padding-bottom: 12px;
         }
 
         .profile-cards {
@@ -260,11 +354,12 @@
         .profile-card {
             background: var(--bg-elevated);
             border: 1px solid var(--border-primary);
-            border-radius: 12px;
-            padding: 24px;
+            border-radius: var(--radius-md);
+            padding: 16px;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.15s ease;
             text-align: left;
+            box-shadow: var(--shadow);
         }
 
         .profile-card-header {
@@ -294,15 +389,17 @@
 
         .profile-card:hover {
             background: var(--bg-overlay);
-            border-color: var(--accent-primary);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 16px rgba(88, 166, 255, 0.1);
+            border-color: var(--border-primary);
+            transform: none;
+            box-shadow: var(--shadow-lg);
         }
 
         .profile-card.selected {
             background: var(--accent-primary);
             border-color: var(--accent-primary);
             color: white;
+            box-shadow: var(--shadow);
+            transform: none;
         }
 
         .profile-card h3 {
@@ -330,15 +427,16 @@
         .config-group {
             background: var(--bg-elevated);
             border: 1px solid var(--border-primary);
-            border-radius: 12px;
-            padding: 24px;
-            margin-bottom: 24px;
+            border-radius: var(--radius-md);
+            padding: 20px;
+            margin-bottom: 16px;
+            box-shadow: var(--shadow);
         }
 
         .config-group h3 {
             color: var(--text-primary);
-            margin-bottom: 20px;
-            font-size: 1.125rem;
+            margin-bottom: 16px;
+            font-size: 14px;
             font-weight: 600;
             letter-spacing: -0.025em;
         }
@@ -371,18 +469,20 @@
 
         .toggle-switch {
             position: relative;
-            width: 44px;
-            height: 24px;
-            background: var(--bg-overlay);
+            width: 40px;
+            height: 22px;
+            background: #d1d5db;
             border: 1px solid var(--border-primary);
-            border-radius: 12px;
+            border-radius: 11px;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.15s ease;
+            box-shadow: none;
         }
 
         .toggle-switch.active {
             background: var(--accent-primary);
             border-color: var(--accent-primary);
+            box-shadow: none;
         }
 
         .toggle-switch::after {
@@ -390,34 +490,37 @@
             position: absolute;
             top: 2px;
             left: 2px;
-            width: 18px;
-            height: 18px;
-            background: white;
+            width: 16px;
+            height: 16px;
+            background: #6b7280;
             border-radius: 50%;
-            transition: transform 0.2s ease;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+            transition: all 0.15s ease;
+            box-shadow: var(--shadow-sm);
         }
 
         .toggle-switch.active::after {
-            transform: translateX(20px);
+            transform: translateX(18px);
+            background: white;
+            box-shadow: var(--shadow-sm);
         }
 
         .text-input {
-            padding: 8px 12px;
-            background: var(--bg-primary);
+            padding: 6px 10px;
+            background: var(--bg-elevated);
             border: 1px solid var(--border-primary);
-            border-radius: 6px;
-            font-size: 14px;
+            border-radius: var(--radius-sm);
+            font-size: 13px;
             width: 200px;
             color: var(--text-primary);
-            font-family: 'JetBrains Mono', monospace;
-            transition: all 0.2s ease;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            transition: all 0.15s ease;
         }
 
         .text-input:focus {
             outline: none;
             border-color: var(--accent-primary);
-            box-shadow: 0 0 0 3px rgba(31, 111, 235, 0.1);
+            box-shadow: 0 0 0 2px rgba(91, 95, 222, 0.15);
+            transform: none;
         }
 
         .text-input::placeholder {
@@ -426,22 +529,24 @@
 
         .list-editor {
             border: 1px solid var(--border-primary);
-            border-radius: 8px;
-            padding: 16px;
+            border-radius: var(--radius-md);
+            padding: 20px;
             background: var(--bg-primary);
+            box-shadow: var(--shadow-sm);
         }
 
         .list-item {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 12px;
-            margin-bottom: 8px;
+            padding: 14px;
+            margin-bottom: 10px;
             background: var(--bg-elevated);
             border: 1px solid var(--border-secondary);
-            border-radius: 6px;
+            border-radius: var(--radius-sm);
             font-family: 'JetBrains Mono', monospace;
             font-size: 13px;
+            transition: all 0.2s ease;
         }
 
         .list-item:last-child {
@@ -449,24 +554,25 @@
         }
 
         .btn {
-            padding: 10px 16px;
+            padding: 6px 12px;
             border: 1px solid var(--border-primary);
-            border-radius: 6px;
+            border-radius: var(--radius-sm);
             cursor: pointer;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 500;
-            transition: all 0.2s ease;
+            transition: all 0.15s ease;
             text-decoration: none;
             display: inline-block;
             text-align: center;
-            font-family: 'Inter', sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             background: var(--bg-elevated);
             color: var(--text-primary);
+            box-shadow: var(--shadow);
         }
 
         .btn:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            transform: none;
+            box-shadow: var(--shadow-lg);
         }
 
         .btn-primary {
@@ -478,6 +584,7 @@
         .btn-primary:hover {
             background: var(--accent-hover);
             border-color: var(--accent-hover);
+            box-shadow: var(--shadow-lg);
         }
 
         .btn-success {
@@ -487,8 +594,9 @@
         }
 
         .btn-success:hover {
-            background: #2da844;
-            border-color: #2da844;
+            background: #059669;
+            border-color: #059669;
+            box-shadow: var(--shadow-lg);
         }
 
         .btn-danger {
@@ -498,19 +606,20 @@
         }
 
         .btn-danger:hover {
-            background: #da3a32;
-            border-color: #da3a32;
+            background: #dc2626;
+            color: white;
         }
 
         .btn-secondary {
-            background: var(--bg-overlay);
-            color: var(--text-primary);
-            border-color: var(--border-primary);
+            background: var(--text-muted);
+            color: white;
+            border-color: var(--text-muted);
         }
 
         .btn-secondary:hover {
-            background: var(--bg-elevated);
-            border-color: var(--border-primary);
+            background: var(--text-secondary);
+            border-color: var(--text-secondary);
+            color: white;
         }
 
         .btn-sm {
@@ -569,8 +678,8 @@
             transform: translate(-50%, -50%);
             background: var(--bg-secondary);
             border: 1px solid var(--border-primary);
-            border-radius: 12px;
-            padding: 32px;
+            border-radius: var(--radius-lg);
+            padding: 36px;
             max-width: 500px;
             width: 90%;
             box-shadow: var(--shadow);
@@ -607,21 +716,24 @@
         }
 
         .file-input-label {
-            padding: 10px 16px;
-            background: var(--accent-primary);
+            padding: 12px 20px;
+            background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-hover) 100%);
             color: white;
-            border-radius: 6px;
+            border-radius: var(--radius-sm);
             cursor: pointer;
             display: inline-block;
             font-size: 14px;
             font-weight: 500;
-            transition: all 0.2s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             border: 1px solid var(--accent-primary);
+            box-shadow: var(--shadow-sm);
         }
 
         .file-input-label:hover {
-            background: var(--accent-hover);
+            background: linear-gradient(135deg, var(--accent-hover) 0%, #ff4757 100%);
             border-color: var(--accent-hover);
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 8px 24px rgba(220, 20, 60, 0.4);
         }
 
         /* Theme Editor Styles */
@@ -635,23 +747,25 @@
         .theme-preset {
             background: var(--bg-elevated);
             border: 1px solid var(--border-primary);
-            border-radius: 8px;
-            padding: 16px;
+            border-radius: var(--radius-md);
+            padding: 20px;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             text-align: center;
+            box-shadow: var(--shadow-sm);
         }
 
         .theme-preset:hover {
             background: var(--bg-overlay);
             border-color: var(--accent-primary);
-            transform: translateY(-2px);
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 12px 32px rgba(220, 20, 60, 0.15);
         }
 
         .theme-preview {
             width: 100%;
             height: 60px;
-            border-radius: 6px;
+            border-radius: var(--radius-sm);
             margin-bottom: 12px;
             border: 1px solid var(--border-secondary);
         }
@@ -660,16 +774,16 @@
             background: linear-gradient(135deg, #0a0a0a 0%, #151515 50%, #dc143c 100%);
         }
 
+        .slate-dark-preview {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #6366f1 100%);
+        }
+
         .obsidian-preview {
             background: linear-gradient(135deg, #0d1117 0%, #161b22 50%, #1f6feb 100%);
         }
 
-        .github-preview {
-            background: linear-gradient(135deg, #0d1117 0%, #21262d 50%, #58a6ff 100%);
-        }
-
-        .vscode-preview {
-            background: linear-gradient(135deg, #1e1e1e 0%, #252526 50%, #007acc 100%);
+        .tokyo-night-preview {
+            background: linear-gradient(135deg, #1a1b26 0%, #252526 50%, #3d59a1 100%);
         }
 
         .nord-preview {
@@ -720,19 +834,21 @@
             width: 50px;
             height: 35px;
             border: 1px solid var(--border-primary);
-            border-radius: 6px;
+            border-radius: var(--radius-sm);
             cursor: pointer;
             background: var(--bg-primary);
+            transition: all 0.2s ease;
         }
 
         .color-text {
-            padding: 6px 10px;
+            padding: 8px 12px;
             background: var(--bg-primary);
             border: 1px solid var(--border-primary);
-            border-radius: 4px;
+            border-radius: var(--radius-sm);
             color: var(--text-primary);
             font-family: 'JetBrains Mono', monospace;
             font-size: 12px;
+            transition: all 0.2s ease;
         }
 
         .color-text:focus {
@@ -789,7 +905,7 @@
 <body>
     <div class="container">
         <div class="header">
-            <pre style="font-family: monospace; font-size: 1rem; line-height: 1; color: var(--text-primary); white-space: pre; text-align: left;">
+            <h1>
 ▐▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▌
 ▐     ▄████████  ▄█          ▄████████     ███        ▄████████  ▌
 ▐    ███    ███ ███         ███    ███ ▀█████████▄   ███    ███  ▌
@@ -801,60 +917,66 @@
 ▐   ▄████████▀  █████▄▄██   ███    █▀     ▄████▀     ██████████  ▌
 ▐               ▀                                                ▌
 ▐▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▌
-            </pre>
-            <p style="text-align: left;">Advanced Configuration Web Interface - by midinterlude (on discord)</p>
+</h1>
+            <div class="header-actions">
+                <button class="header-btn" onclick="window.location.href = 'https://github.com/midinterlude/slate/releases/latest/';">
+                    <i class="fas fa-download"></i>
+                    Download
+                </button>
+            </div>
         </div>
 
         <div class="main-content">
             <div class="sidebar">
-                <button class="nav-item active" onclick="showSection('profiles')">
-                    <i class="fas fa-layer-group"></i>
-                    <div class="divider"></div>
-                    <span>Profiles</span>
-                </button>
-                <button class="nav-item" onclick="showSection('general')">
-                    <i class="fas fa-cog"></i>
-                    <div class="divider"></div>
-                    <span>General</span>
-                </button>
-                <button class="nav-item" onclick="showSection('cleaning')">
-                    <i class="fas fa-broom"></i>
-                    <div class="divider"></div>
-                    <span>Cleaning</span>
-                </button>
-                <button class="nav-item" onclick="showSection('roblox')">
-                    <i class="fas fa-gamepad"></i>
-                    <div class="divider"></div>
-                    <span>Roblox</span>
-                </button>
-                <button class="nav-item" onclick="showSection('tools')">
-                    <i class="fas fa-tools"></i>
-                    <div class="divider"></div>
-                    <span>Tools</span>
-                </button>
-                <button class="nav-item" onclick="showSection('paths')">
-                    <i class="fas fa-folder"></i>
-                    <div class="divider"></div>
-                    <span>Paths</span>
-                </button>
-                <button class="nav-item" onclick="showSection('advanced')">
-                    <i class="fas fa-microscope"></i>
-                    <div class="divider"></div>
-                    <span>Advanced</span>
-                </button>
-                <button class="nav-item" onclick="showSection('theme')">
-                    <i class="fas fa-palette"></i>
-                    <div class="divider"></div>
-                    <span>Theme</span>
-                </button>
-                <button class="nav-item" onclick="showSection('backup')">
-                    <i class="fas fa-save"></i>
-                    <div class="divider"></div>
-                    <span>Backup</span>
-                </button>
+                <div class="nav-section">
+                    <div class="nav-section-title">Configuration</div>
+                    <button class="nav-item active" onclick="showSection('profiles')">
+                        <i class="fas fa-layer-group"></i>
+                        <span>Profiles</span>
+                    </button>
+                    <button class="nav-item" onclick="showSection('general')">
+                        <i class="fas fa-cog"></i>
+                        <span>General</span>
+                    </button>
+                    <button class="nav-item" onclick="showSection('cleaning')">
+                        <i class="fas fa-broom"></i>
+                        <span>Cleaning</span>
+                    </button>
+                    <button class="nav-item" onclick="showSection('roblox')">
+                        <i class="fas fa-gamepad"></i>
+                        <span>Roblox</span>
+                    </button>
+                </div>
+
+                <div class="nav-section">
+                    <div class="nav-section-title">Tools</div>
+                    <button class="nav-item" onclick="showSection('tools')">
+                        <i class="fas fa-wrench"></i>
+                        <span>Tools</span>
+                    </button>
+                    <button class="nav-item" onclick="showSection('paths')">
+                        <i class="fas fa-folder"></i>
+                        <span>Paths</span>
+                    </button>
+                </div>
+
+                <div class="nav-section">
+                    <div class="nav-section-title">System</div>
+                    <button class="nav-item" onclick="showSection('advanced')">
+                        <i class="fas fa-cogs"></i>
+                        <span>Advanced</span>
+                    </button>
+                    <button class="nav-item" onclick="showSection('theme')">
+                        <i class="fas fa-palette"></i>
+                        <span>Theme</span>
+                    </button>
+                    <button class="nav-item" onclick="showSection('backup')">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <span>Backup</span>
+                    </button>
+                </div>
                 <button class="nav-item" onclick="openLogLocation()">
                     <i class="fas fa-file-alt"></i>
-                    <div class="divider"></div>
                     <span>Logs</span>
                 </button>
                 
@@ -862,12 +984,10 @@
                 <div class="sidebar-actions">
                     <button class="sidebar-btn btn-primary" onclick="saveOnly()">
                         <i class="fas fa-save"></i>
-                        <div class="divider"></div>
                         <span>Save</span>
                     </button>
                     <button class="sidebar-btn btn-secondary" onclick="cancel()">
                         <i class="fas fa-times"></i>
-                        <div class="divider"></div>
                         <span>Cancel</span>
                     </button>
                 </div>
@@ -882,33 +1002,33 @@
                             <div class="profile-card-header">
                                 <i class="fas fa-star"></i>
                                 <div class="divider"></div>
-                                <h3>Default</h3>
+                                <h3>Balanced</h3>
+                                <i class="fas fa-check-circle" style="color: #10b981; margin-left: auto; font-size: 14px;" title="Recommended profile"></i>
                             </div>
-                            <p>Balanced cleaning with essential features. Recommended for most users.</p>
+                            <p>Balanced cleaning with essential features. This configuration profile is recommended for most users.</p>
+                            <div style="margin-top: 8px; padding: 6px 8px; background: rgba(16, 185, 129, 0.1); border-radius: 4px; border-left: 3px solid #10b981;">
+                                <small style="color: #10b981; font-weight: 600; font-size: 11px;">✅ Recommended for most users.</small>
+                            </div>
                         </div>
                         <div class="profile-card" onclick="selectProfile('aggressive')">
                             <div class="profile-card-header">
                                 <i class="fas fa-fire"></i>
                                 <div class="divider"></div>
                                 <h3>Aggressive</h3>
+                                <i class="fas fa-exclamation-triangle" style="color: #f59e0b; margin-left: auto; font-size: 14px;" title="This profile will restart your PC after cleaning"></i>
                             </div>
-                            <p>Maximum cleaning with all features enabled. For deep cleaning scenarios.</p>
+                            <p>Maximum cleaning power. Removes all temporary files and optimizes system performance.</p>
+                            <div style="margin-top: 8px; padding: 6px 8px; background: rgba(245, 158, 11, 0.1); border-radius: 4px; border-left: 3px solid #f59e0b;">
+                                <small style="color: #f59e0b; font-weight: 600; font-size: 11px;">⚠️ Restarts your computer automatically to apply changes.</small>
+                            </div>
                         </div>
                         <div class="profile-card" onclick="selectProfile('minimal')">
                             <div class="profile-card-header">
-                                <i class="fas fa-feather"></i>
+                                <i class="fas fa-shield-alt"></i>
                                 <div class="divider"></div>
                                 <h3>Minimal</h3>
                             </div>
                             <p>Basic cleaning only. Safe option with minimal system impact.</p>
-                        </div>
-                        <div class="profile-card" onclick="selectProfile('balanced')">
-                            <div class="profile-card-header">
-                                <i class="fas fa-balance-scale"></i>
-                                <div class="divider"></div>
-                                <h3>Balanced</h3>
-                            </div>
-                            <p>Balanced configuration with essential cleaning features. Safe and effective for most users.</p>
                         </div>
                         <div class="profile-card" onclick="selectProfile('custom')">
                             <div class="profile-card-header">
@@ -1167,22 +1287,22 @@
                             <div class="theme-preset" onclick="applyTheme('slate')">
                                 <div class="theme-preview slate-preview"></div>
                                 <h4>Slate</h4>
-                                <p>dark grey with crimson accents</p>
+                                <p>Original dark theme</p>
+                            </div>
+                            <div class="theme-preset" onclick="applyTheme('slate-dark')">
+                                <div class="theme-preview slate-dark-preview"></div>
+                                <h4>Slate Dark</h4>
+                                <p>New dark theme</p>
                             </div>
                             <div class="theme-preset" onclick="applyTheme('obsidian')">
                                 <div class="theme-preview obsidian-preview"></div>
                                 <h4>Obsidian</h4>
                                 <p>Dark theme with blue accents</p>
                             </div>
-                            <div class="theme-preset" onclick="applyTheme('github-dark')">
-                                <div class="theme-preview github-preview"></div>
-                                <h4>GitHub Dark</h4>
-                                <p>Classic dark interface</p>
-                            </div>
-                            <div class="theme-preset" onclick="applyTheme('vscode-dark')">
-                                <div class="theme-preview vscode-preview"></div>
-                                <h4>VS Code Dark</h4>
-                                <p>Developer favorite</p>
+                            <div class="theme-preset" onclick="applyTheme('tokyo-night')">
+                                <div class="theme-preview tokyo-night-preview"></div>
+                                <h4>Tokyo Night</h4>
+                                <p>Modern dark theme</p>
                             </div>
                             <div class="theme-preset" onclick="applyTheme('nord')">
                                 <div class="theme-preview nord-preview"></div>
@@ -1197,7 +1317,7 @@
                             <div class="theme-preset" onclick="applyTheme('light')">
                                 <div class="theme-preview light-preview"></div>
                                 <h4>Light</h4>
-                                <p>Clean light interface</p>
+                                <p>You disgust me if you prefer this over other themes.</p>
                             </div>
                         </div>
                     </div>
@@ -1323,6 +1443,21 @@
     </div>
 
     <script>
+        // Download configuration function
+        function downloadConfig() {
+            const configData = JSON.stringify(config, null, 2);
+            const blob = new Blob([configData], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'slate-config.json';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            updateStatus('Configuration downloaded successfully');
+        }
+
         // Configuration data structure
         let config = {
             general: {
@@ -1465,19 +1600,14 @@
                     auto_restart_after_cleaning: false
                 }
             },
-            balanced: {
+            minimal: {
                 general: {
                     log_enabled: true,
                     open_log_on_exit: false,
-                    capture_console_history: true,
-                    clear_screen_on_sections: false
+                    clear_screen_on_sections: false,
+                    auto_restart_after_cleaning: false
                 },
                 cleaning: {
-                    kill_processes: true,
-                    clean_folders: false,
-                    remove_cookies: true,
-                    flush_dns: true,
-                    restart_explorer: false,
                     clean_registry: false,
                     clean_prefetch: false
                 },
@@ -1527,6 +1657,28 @@
                 'border-primary': '#30363d',
                 'success': '#3fb950',
                 'danger': '#f85149'
+            },
+            'slate-dark': {
+                'bg-primary': '#0f172a',
+                'bg-secondary': '#1e293b',
+                'bg-tertiary': '#334155',
+                'bg-elevated': '#1e293b',
+                'text-primary': '#f8fafc',
+                'text-secondary': '#94a3b8',
+                'accent-primary': '#6366f1',
+                'border-primary': '#334155'
+            },
+            'tokyo-night': {
+                'bg-primary': '#1a1b26',
+                'bg-secondary': '#1e1e1e',
+                'bg-tertiary': '#2d2d44',
+                'bg-elevated': '#252526',
+                'text-primary': '#959cbd',
+                'text-secondary': '#787c99',
+                'accent-primary': '#3d59a1',
+                'border-primary': '#30363d',
+                'success': '#4caf50',
+                'danger': '#f44336'
             },
             'github-dark': {
                 'bg-primary': '#0d1117',
