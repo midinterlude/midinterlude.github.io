@@ -1076,7 +1076,7 @@
                                 <div class="config-label">Clear Screen on Sections</div>
                                 <div class="config-description">Clear console between major operations</div>
                             </div>
-                            <div class="toggle-switch active" onclick="toggleSwitch(this)"></div>
+                            <div id="clear-screen-on-sections" class="toggle-switch active" onclick="toggleSwitch(this)"></div>
                         </div>
                     </div>
                 </div>
@@ -1109,6 +1109,13 @@
                         </div>
                         <div class="config-item">
                             <div>
+                                <div class="config-label">Clean Browser Cookies</div>
+                                <div class="config-description">Remove Roblox cookies from web browsers</div>
+                            </div>
+                            <div id="clean-browser-cookies" class="toggle-switch" onclick="toggleSwitch(this)"></div>
+                        </div>
+                        <div class="config-item">
+                            <div>
                                 <div class="config-label">Flush DNS</div>
                                 <div class="config-description">Clear DNS cache</div>
                             </div>
@@ -1119,14 +1126,14 @@
                                 <div class="config-label">Clean Registry</div>
                                 <div class="config-description">Remove Roblox registry entries</div>
                             </div>
-                            <div class="toggle-switch active" onclick="toggleSwitch(this)"></div>
+                            <div id="clean-registry" class="toggle-switch active" onclick="toggleSwitch(this)"></div>
                         </div>
                         <div class="config-item">
                             <div>
                                 <div class="config-label">Clean Prefetch</div>
                                 <div class="config-description">Remove Windows prefetch files</div>
                             </div>
-                            <div class="toggle-switch active" onclick="toggleSwitch(this)"></div>
+                            <div id="clean-prefetch" class="toggle-switch active" onclick="toggleSwitch(this)"></div>
                         </div>
                     </div>
 
@@ -1137,7 +1144,7 @@
                                 <div class="config-label">Restart Explorer</div>
                                 <div class="config-description">Restart Windows Explorer after cleaning</div>
                             </div>
-                            <div class="toggle-switch" onclick="toggleSwitch(this)"></div>
+                            <div id="restart-explorer" class="toggle-switch" onclick="toggleSwitch(this)"></div>
                         </div>
                     </div>
                 </div>
@@ -1152,21 +1159,21 @@
                                 <div class="config-label">Download Roblox</div>
                                 <div class="config-description">Download latest Roblox client after cleaning</div>
                             </div>
-                            <div class="toggle-switch active" onclick="toggleSwitch(this)"></div>
+                            <div id="download-roblox" class="toggle-switch active" onclick="toggleSwitch(this)"></div>
                         </div>
                         <div class="config-item">
                             <div>
                                 <div class="config-label">Launch Roblox on Exit</div>
                                 <div class="config-description">Start Roblox when cleaning completes</div>
                             </div>
-                            <div class="toggle-switch" onclick="toggleSwitch(this)"></div>
+                            <div id="launch-roblox-on-exit" class="toggle-switch" onclick="toggleSwitch(this)"></div>
                         </div>
                         <div class="config-item">
                             <div>
                                 <div class="config-label">Create AppSettings</div>
                                 <div class="config-description">Generate AppSettings.xml file</div>
                             </div>
-                            <div class="toggle-switch active" onclick="toggleSwitch(this)"></div>
+                            <div id="create-appsettings" class="toggle-switch active" onclick="toggleSwitch(this)"></div>
                         </div>
                         <div class="config-item">
                             <div>
@@ -1182,13 +1189,30 @@
                 <div id="tools" class="section">
                     <h2>Tools & Utilities</h2>
                     <div class="config-group">
-                        <h3>Third-party Tools</h3>
+                        <h3>Network Spoofing</h3>
                         <div class="config-item">
                             <div>
-                                <div class="config-label">Run ByeBanAsync</div>
-                                <div class="config-description">Execute ByeBanAsync for additional cleaning</div>
+                                <div class="config-label">Spoof MAC Address</div>
+                                <div class="config-description">Randomize network adapter MAC addresses.</div>
                             </div>
-                            <div id="run-bye-ban-async" class="toggle-switch active" onclick="toggleSwitch(this)"></div>
+                            <div id="tools_SpoofMAC" class="toggle-switch active" onclick="toggleSwitch(this); toggleMacOptions();"></div>
+                        </div>
+                        <div id="mac_options" style="display:none; margin-left: 20px; padding-left: 15px; border-left: 2px solid var(--border-primary); margin-top: 10px;">
+                            <div class="config-item">
+                                <div>
+                                    <label for="tools_spoof_mac_mode" class="config-label">Spoofing Mode</label>
+                                    <div class="config-description">Choose which adapters to spoof.</div>
+                                </div>
+                                <select id="tools_spoof_mac_mode" onchange="toggleMacAdapters()" class="text-input" style="width: auto;">
+                                    <option value="all" selected>Spoof All Adapters</option>
+                                    <option value="manual">Manual Selection</option>
+                                </select>
+                            </div>
+                            <div id="mac_adapters_container" style="display:none; margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border-secondary);">
+                                <label class="config-label">Target Adapters</label>
+                                <div class="config-description" style="margin-bottom: 10px;">Enter one adapter "Connection Name" per line (e.g., "Ethernet").</div>
+                                <textarea id="tools_spoof_mac_adapters" rows="4" class="text-input" style="width: 100%; min-height: 80px; font-family: 'JetBrains Mono', monospace;" placeholder="Ethernet&#10;Wi-Fi"></textarea>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1251,28 +1275,28 @@
                                 <div class="config-label">Show Command Output</div>
                                 <div class="config-description">Display detailed command execution output</div>
                             </div>
-                            <div class="toggle-switch active" onclick="toggleSwitch(this)"></div>
+                            <div id="show-command-output" class="toggle-switch active" onclick="toggleSwitch(this)"></div>
                         </div>
                         <div class="config-item">
                             <div>
                                 <div class="config-label">Force File Deletion</div>
                                 <div class="config-description">Attempt to remove read-only files</div>
                             </div>
-                            <div class="toggle-switch active" onclick="toggleSwitch(this)"></div>
+                            <div id="force-file-deletion" class="toggle-switch active" onclick="toggleSwitch(this)"></div>
                         </div>
                         <div class="config-item">
                             <div>
                                 <div class="config-label">Skip Confirmation Prompts</div>
                                 <div class="config-description">Run without asking for confirmation</div>
                             </div>
-                            <div class="toggle-switch" onclick="toggleSwitch(this)"></div>
+                            <div id="skip-confirmation-prompts" class="toggle-switch" onclick="toggleSwitch(this)"></div>
                         </div>
                         <div class="config-item">
                             <div>
                                 <div class="config-label">Auto Restart After Cleaning</div>
                                 <div class="config-description">Automatically restart computer when done</div>
                             </div>
-                            <div class="toggle-switch" onclick="toggleSwitch(this)"></div>
+                            <div id="auto-restart-after-cleaning" class="toggle-switch" onclick="toggleSwitch(this)"></div>
                         </div>
                     </div>
                 </div>
@@ -1470,6 +1494,7 @@
                 kill_processes: true,
                 clean_folders: true,
                 remove_cookies: true,
+                clean_browser_cookies: false,
                 flush_dns: true,
                 restart_explorer: false,
                 clean_registry: true,
@@ -1482,7 +1507,9 @@
                 use_past_versions: false
             },
             tools: {
-                run_byebanasync: true
+                SpoofMAC: true,
+                spoof_mac_mode: "all",
+                spoof_mac_adapters: []
             },
             paths: {
                 temp_folders: ["%temp%", "%temp%/*", "%localappdata%\\Temp"],
@@ -1515,6 +1542,7 @@
                     kill_processes: true,
                     clean_folders: true,
                     remove_cookies: true,
+                    clean_browser_cookies: true,
                     flush_dns: true,
                     restart_explorer: false,
                     clean_registry: true,
@@ -1527,7 +1555,9 @@
                     use_past_versions: false
                 },
                 tools: {
-                    run_byebanasync: true
+                    SpoofMAC: true,
+                    spoof_mac_mode: "all",
+                    spoof_mac_adapters: []
                 },
                 advanced: {
                     show_command_output: true,
@@ -1547,6 +1577,7 @@
                     kill_processes: true,
                     clean_folders: true,
                     remove_cookies: true,
+                    clean_browser_cookies: true,
                     flush_dns: true,
                     restart_explorer: true,
                     clean_registry: true,
@@ -1559,7 +1590,9 @@
                     use_past_versions: false
                 },
                 tools: {
-                    run_byebanasync: true
+                    SpoofMAC: true,
+                    spoof_mac_mode: "all",
+                    spoof_mac_adapters: []
                 },
                 advanced: {
                     show_command_output: true,
@@ -1579,6 +1612,7 @@
                     kill_processes: true,
                     clean_folders: false,
                     remove_cookies: true,
+                    clean_browser_cookies: true,
                     flush_dns: true,
                     restart_explorer: false,
                     clean_registry: false,
@@ -1591,7 +1625,9 @@
                     use_past_versions: false
                 },
                 tools: {
-                    run_byebanasync: true
+                    SpoofMAC: true,
+                    spoof_mac_mode: "all",
+                    spoof_mac_adapters: []
                 },
                 advanced: {
                     show_command_output: true,
@@ -1862,6 +1898,19 @@
             updateStatus('Configuration updated');
         }
 
+        function toggleMacOptions() {
+            const enabled = document.getElementById('tools_SpoofMAC').classList.contains('active');
+            document.getElementById('mac_options').style.display = enabled ? 'block' : 'none';
+            if (enabled) {
+                toggleMacAdapters();
+            }
+        }
+
+        function toggleMacAdapters() {
+            const mode = document.getElementById('tools_spoof_mac_mode').value;
+            document.getElementById('mac_adapters_container').style.display = (mode === 'manual') ? 'block' : 'none';
+        }
+
         // List management
         function addListItem(listId, inputId) {
             const input = document.getElementById(inputId);
@@ -1904,25 +1953,27 @@
                 ['cleaning', 'kill_processes', 'cleaning', 0],
                 ['cleaning', 'clean_folders', 'cleaning', 1],
                 ['cleaning', 'remove_cookies', 'cleaning', 2],
-                ['cleaning', 'flush_dns', 'cleaning', 3],
-                ['cleaning', 'restart_explorer', 'cleaning', 4],
+                ['cleaning', 'clean_browser_cookies', 'cleaning', 3],
+                ['cleaning', 'flush_dns', 'cleaning', 4],
                 ['cleaning', 'clean_registry', 'cleaning', 5],
                 ['cleaning', 'clean_prefetch', 'cleaning', 6],
+                ['cleaning', 'restart_explorer', 'cleaning', 7],
                 ['roblox', 'download_roblox', 'roblox', 0],
                 ['roblox', 'launch_roblox_on_exit', 'roblox', 1],
                 ['roblox', 'create_appsettings', 'roblox', 2],
                 ['roblox', 'use_past_versions', 'roblox', 3],
-                ['tools', 'run_byebanasync', 'tools', 0],
+                ['tools', 'SpoofMAC', 'tools', 0, 'tools_SpoofMAC'],
                 ['advanced', 'show_command_output', 'advanced', 0],
                 ['advanced', 'force_file_deletion', 'advanced', 1],
                 ['advanced', 'skip_confirmation_prompts', 'advanced', 2],
                 ['advanced', 'auto_restart_after_cleaning', 'advanced', 3]
             ];
 
-            toggleMappings.forEach(([section, key, targetSection, index]) => {
+            toggleMappings.forEach(([section, key, targetSection, index, id]) => {
                 const sectionElement = document.getElementById(targetSection);
                 if (sectionElement) {
-                    const toggles = sectionElement.querySelectorAll('.toggle-switch');
+                    const toggleId = id || key;
+                    const toggles = sectionElement.querySelectorAll(id ? `#${id}` : '.toggle-switch');
                     if (toggles[index]) {
                         if (config[section][key]) {
                             toggles[index].classList.add('active');
@@ -1936,6 +1987,13 @@
             // Update list items
             updateListFromConfig('temp-folders', config.paths.temp_folders);
             updateListFromConfig('roblox-folders', config.paths.roblox_folders);
+
+            // Update MAC spoofing UI
+            const toolsConfig = config.tools || {};
+            document.getElementById('tools_spoof_mac_mode').value = toolsConfig.spoof_mac_mode || 'all';
+            document.getElementById('tools_spoof_mac_adapters').value = (toolsConfig.spoof_mac_adapters || []).join('\n');
+            
+            toggleMacOptions(); // This will handle visibility
         }
 
         function updateListFromConfig(listId, items) {
@@ -1972,25 +2030,27 @@
                 ['cleaning', 'kill_processes', 'cleaning', 0],
                 ['cleaning', 'clean_folders', 'cleaning', 1],
                 ['cleaning', 'remove_cookies', 'cleaning', 2],
-                ['cleaning', 'flush_dns', 'cleaning', 3],
-                ['cleaning', 'restart_explorer', 'cleaning', 4],
+                ['cleaning', 'clean_browser_cookies', 'cleaning', 3],
+                ['cleaning', 'flush_dns', 'cleaning', 4],
                 ['cleaning', 'clean_registry', 'cleaning', 5],
                 ['cleaning', 'clean_prefetch', 'cleaning', 6],
+                ['cleaning', 'restart_explorer', 'cleaning', 7],
                 ['roblox', 'download_roblox', 'roblox', 0],
                 ['roblox', 'launch_roblox_on_exit', 'roblox', 1],
                 ['roblox', 'create_appsettings', 'roblox', 2],
                 ['roblox', 'use_past_versions', 'roblox', 3],
-                ['tools', 'run_byebanasync', 'tools', 0],
+                ['tools', 'SpoofMAC', 'tools', 0, 'tools_SpoofMAC'],
                 ['advanced', 'show_command_output', 'advanced', 0],
                 ['advanced', 'force_file_deletion', 'advanced', 1],
                 ['advanced', 'skip_confirmation_prompts', 'advanced', 2],
                 ['advanced', 'auto_restart_after_cleaning', 'advanced', 3]
             ];
 
-            toggleMappings.forEach(([section, key, targetSection, index]) => {
+            toggleMappings.forEach(([section, key, targetSection, index, id]) => {
                 const sectionElement = document.getElementById(targetSection);
                 if (sectionElement) {
-                    const toggles = sectionElement.querySelectorAll('.toggle-switch');
+                    const toggleId = id || key;
+                    const toggles = sectionElement.querySelectorAll(id ? `#${id}` : '.toggle-switch');
                     if (toggles[index]) {
                         config[section][key] = toggles[index].classList.contains('active');
                     }
@@ -2000,6 +2060,12 @@
             // Update list items
             config.paths.temp_folders = getListItems('temp-folders');
             config.paths.roblox_folders = getListItems('roblox-folders');
+
+            // Update MAC spoofing config
+            const adaptersText = document.getElementById('tools_spoof_mac_adapters').value;
+            const adaptersList = adaptersText.split('\n').map(s => s.trim()).filter(s => s.length > 0);
+            config.tools.spoof_mac_mode = document.getElementById('tools_spoof_mac_mode').value;
+            config.tools.spoof_mac_adapters = adaptersList;
         }
 
         function getListItems(listId) {
@@ -2056,6 +2122,7 @@
                     kill_processes: document.querySelector('#kill-processes')?.classList.contains('active') || false,
                     clean_folders: document.querySelector('#clean-folders')?.classList.contains('active') || false,
                     remove_cookies: document.querySelector('#remove-cookies')?.classList.contains('active') || false,
+                    clean_browser_cookies: document.querySelector('#clean-browser-cookies')?.classList.contains('active') || false,
                     flush_dns: document.querySelector('#flush-dns')?.classList.contains('active') || false,
                     clean_registry: document.querySelector('#clean-registry')?.classList.contains('active') || false,
                     clean_prefetch: document.querySelector('#clean-prefetch')?.classList.contains('active') || false,
@@ -2068,8 +2135,11 @@
                     use_past_versions: document.querySelector('#use-past-versions')?.classList.contains('active') || false
                 },
                 tools: {
-                    run_byebanasync: document.querySelector('#run-bye-ban-async')?.classList.contains('active') || false
+                    SpoofMAC: document.getElementById('tools_SpoofMAC')?.classList.contains('active') || false,
+                    spoof_mac_mode: document.getElementById('tools_spoof_mac_mode').value,
+                    spoof_mac_adapters: document.getElementById('tools_spoof_mac_adapters').value.split('\n').map(s => s.trim()).filter(s => s.length > 0)
                 },
+
                 paths: {
                     temp_folders: getListItems('temp-folders'),
                     roblox_folders: getListItems('roblox-folders')
@@ -2365,7 +2435,7 @@
 
         // Log location function
         function openLogLocation() {
-            const logPath = '%temp%\\slate\\slate.log';
+            const logPath = 'your-slate-directory\\misc\\slate.log';
             
             showModal('Log Location', 
                 'Log files are stored at:<br><br>' +
